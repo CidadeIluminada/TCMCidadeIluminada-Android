@@ -148,5 +148,15 @@
             android:layout_marginStart="@dimen/protocoloEnderecoFieldsMargin"
             android:hint="59"
             android:inputType="number" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/protocoloPlacePickerButtonLabel"
+            android:onClick="openPlacePicker"
+            android:id="@+id/openPlacePickerButton"
+            android:layout_below="@+id/protocoloDescricaoEditText"
+            android:layout_toEndOf="@+id/enderecoProtocoloLabel" />
     </RelativeLayout>
 </ScrollView>

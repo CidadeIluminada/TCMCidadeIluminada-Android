@@ -1,9 +1,11 @@
 package br.com.bilac.tcm.cidadeiluminada.protocolos;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Environment;
@@ -21,12 +23,19 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import br.com.bilac.tcm.cidadeiluminada.Constants;
 import br.com.bilac.tcm.cidadeiluminada.R;
@@ -59,6 +68,18 @@ public class ProtocoloActivity extends ActionBarActivity implements
     private GoogleApiClient googleApiClient;
     private Location lastLocation;
 
+    public void openPlacePicker(View view) {
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+        try {
+            startActivityForResult(builder.build(getApplicationContext()),
+                    Constants.PLACE_PICKER_REQUEST_CODE);
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+    }
+
     private class AddressResultReceiver extends ResultReceiver {
 
         private AddressResultReceiver(Handler handler) {
@@ -69,7 +90,6 @@ public class ProtocoloActivity extends ActionBarActivity implements
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             if (resultCode == Constants.SUCESS_RESULT) {
                 Address address = resultData.getParcelable(Constants.RESULT_DATA_KEY);
-                fillAddressFields(address);
             }
         }
     }
@@ -220,6 +240,21 @@ public class ProtocoloActivity extends ActionBarActivity implements
                 ImageButton img = (ImageButton) findViewById(R.id.openCameraButton);
                 img.setImageDrawable(getResources().getDrawable(R.drawable.cameraadd128));
             }
+        } else if (requestCode == Constants.PLACE_PICKER_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
+                Log.d("place", "" + place.getAddress());
+                Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+                try {
+                    List<Address> addresses = geocoder.getFromLocation(place.getLatLng().latitude,
+                            place.getLatLng().longitude, 1);
+                    fillAddressFields(addresses.get(0));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                String toastMsg = String.format("Place: %s", place.getAddress());
+                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -285,4 +320,6 @@ public class ProtocoloActivity extends ActionBarActivity implements
     public void onConnectionFailed(ConnectionResult connectionResult) {
         Log.d("connectionFailed", "Google API connection Failed: " + connectionResult.toString());
     }
+
+
 }
