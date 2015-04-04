@@ -156,7 +156,7 @@
             android:text="@string/protocoloPlacePickerButtonLabel"
             android:onClick="openPlacePicker"
             android:id="@+id/openPlacePickerButton"
-            android:layout_below="@+id/protocoloDescricaoEditText"
-            android:layout_toEndOf="@+id/enderecoProtocoloLabel" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignBaseline="@+id/enderecoProtocoloLabel"/>
     </RelativeLayout>
 </ScrollView>
