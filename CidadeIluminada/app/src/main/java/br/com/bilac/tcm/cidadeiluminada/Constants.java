@@ -21,4 +21,5 @@ public final class Constants {
             ".LOCATION_DATA_EXTRA";
 
     public static final String JPG_MIME_TYPE = "image/jpeg";
+    public static final int PLACE_PICKER_REQUEST_CODE = 200;
 }
