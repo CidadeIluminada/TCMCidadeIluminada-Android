@@ -1,7 +1,6 @@
-package br.com.bilac.tcm.cidadeiluminada.protocolos.models;
+package br.com.bilac.tcm.cidadeiluminada.models;
 
 import android.net.Uri;
-import android.util.Log;
 
 import com.orm.SugarRecord;
 

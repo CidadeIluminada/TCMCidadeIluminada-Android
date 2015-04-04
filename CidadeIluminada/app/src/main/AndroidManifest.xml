@@ -17,7 +17,8 @@
         <meta-data android:name="QUERY_LOG" android:value="true"/>
         <meta-data android:name="DATABASE" android:value="cidadeiluminada"/>
         <meta-data android:name="VERSION" android:value="2"/>
-        <meta-data android:name="DOMAIN_PAKAGE_NAME" android:value="br.com.bilac.tcm"/>
+        <meta-data android:name="DOMAIN_PAKAGE_NAME"
+            android:value="br.com.bilac.tcm.cidadeiluminada.models"/>
 
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
