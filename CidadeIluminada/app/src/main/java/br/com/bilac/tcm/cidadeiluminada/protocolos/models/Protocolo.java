@@ -1,5 +1,8 @@
 package br.com.bilac.tcm.cidadeiluminada.protocolos.models;
 
+import android.net.Uri;
+import android.util.Log;
+
 import com.orm.SugarRecord;
 
 import java.util.UUID;
@@ -16,11 +19,13 @@ public class Protocolo extends SugarRecord {
     private String bairro;
     private String logradouro;
     private String numero;
+    private String arquivo_protocolo;
 
     public Protocolo() {
     }
 
-    public Protocolo(String cep, String estado, String cidade, String bairro, String logradouro, String numero) {
+    public Protocolo(String cep, String estado, String cidade, String bairro, String logradouro,
+                     String numero, String arquivo_protocolo) {
         this.cod_protocolo = UUID.randomUUID().toString();
 
         this.cep = cep;
@@ -29,10 +34,13 @@ public class Protocolo extends SugarRecord {
         this.bairro = bairro;
         this.logradouro = logradouro;
         this.numero = numero;
+        this.arquivo_protocolo = arquivo_protocolo;
     }
 
-    public static Protocolo novoProtocoloSJC(String cep, String bairro, String logradouro, String numero) {
-        return new Protocolo(cep, "SP", "Sâo José dos Campos", bairro, logradouro, numero);
+    public static Protocolo novoProtocoloSJC(String cep, String bairro, String logradouro,
+                                             String numero, Uri arquivo_protocolo) {
+        return new Protocolo(cep, "SP", "Sâo José dos Campos", bairro, logradouro, numero,
+                arquivo_protocolo.toString());
     }
 
     public String getCep() {
@@ -41,5 +49,13 @@ public class Protocolo extends SugarRecord {
 
     public String getNumero() {
         return numero;
+    }
+
+    public String getCodProtocolo() {
+        return cod_protocolo;
+    }
+
+    public Uri getArquivoProtocolo() {
+        return Uri.parse(arquivo_protocolo);
     }
 }

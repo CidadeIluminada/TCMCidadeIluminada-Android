@@ -32,10 +32,15 @@ import br.com.bilac.tcm.cidadeiluminada.Constants;
 import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.models.Protocolo;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.services.FetchAddressIntentService;
-import br.com.bilac.tcm.cidadeiluminada.protocolos.services.ProtocolosServices;
-import br.com.bilac.tcm.cidadeiluminada.protocolos.services.utils.APIResponse;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.validators.EmptyValidator;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.validators.ValidationState;
+import br.com.bilac.tcm.cidadeiluminada.services.CidadeIluminadaAdapter;
+import br.com.bilac.tcm.cidadeiluminada.services.CidadeIluminadaService;
+import br.com.bilac.tcm.cidadeiluminada.services.utils.CidadeIluminadaApiResponse;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.mime.TypedFile;
 
 public class ProtocoloActivity extends ActionBarActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -164,14 +169,32 @@ public class ProtocoloActivity extends ActionBarActivity implements
             Protocolo protocolo =
                     Protocolo.novoProtocoloSJC(cepEditText.getText().toString(),
                             bairroEditText.getText().toString(), ruaEditText.getText().toString(),
-                            numeroEditText.getText().toString());
+                            numeroEditText.getText().toString(), fileUri);
 
-            File foto = new File(fileUri.getPath());
-            APIResponse response = ProtocolosServices.EnviarNovoProtocolo(foto, protocolo.getCep(),
-                    protocolo.getNumero(), descricaoEditText.getText().toString());
             long novoId = protocolo.save();
             Log.d("novoProtocolo", "Novo id de protocolo=" + novoId);
-            Toast.makeText(this, response.toString(), Toast.LENGTH_SHORT).show();
+            Uri uri_protocolo = protocolo.getArquivoProtocolo();
+            File arquivo_protocolo = new File(protocolo.getArquivoProtocolo().getPath());
+            Log.d("novoProtocolo", "arquivo_protocolo.getAbsolutePath() " + arquivo_protocolo.getAbsolutePath());
+            Log.d("novoProtocolo", "arquivo_protocolo.getPath() " + arquivo_protocolo.getPath());
+            Log.d("novoProtocolo", "uri_protocolo.getPath() " + uri_protocolo.getPath());
+            Log.d("novoProtocolo", "uri_protocolo.toString() " + uri_protocolo.toString());
+            CidadeIluminadaService service = CidadeIluminadaAdapter.getCidadeIluminadaService();
+            service.novoProtocolo(protocolo.getCodProtocolo(), protocolo.getCep(),
+                    new TypedFile(Constants.JPG_MIME_TYPE, new File(protocolo.getArquivoProtocolo().getPath())),
+                    new Callback<CidadeIluminadaApiResponse>() {
+                        @Override
+                        public void success(CidadeIluminadaApiResponse cidadeIluminadaApiResponse,
+                                            Response response) {
+                            Log.d("sucess", cidadeIluminadaApiResponse.toString() + " " +
+                                    response.toString());
+                        }
+
+                        @Override
+                        public void failure(RetrofitError retrofitError) {
+                            Log.e("error", retrofitError.toString());
+                        }
+                    });
         } else {
             Toast.makeText(this, "Existem erros no formulário", Toast.LENGTH_SHORT).show();
         }
