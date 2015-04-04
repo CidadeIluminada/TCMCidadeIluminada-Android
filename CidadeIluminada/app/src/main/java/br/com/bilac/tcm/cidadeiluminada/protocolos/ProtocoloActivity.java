@@ -2,11 +2,9 @@ package br.com.bilac.tcm.cidadeiluminada.protocolos;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
@@ -26,11 +24,10 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import br.com.bilac.tcm.cidadeiluminada.CameraUtils;
 import br.com.bilac.tcm.cidadeiluminada.Constants;
 import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
@@ -69,17 +66,18 @@ public class ProtocoloActivity extends ActionBarActivity {
         }
     }
 
-    private void fillAddressFields(Address address) {
-        cepEditText.setText(address.getPostalCode());
-        bairroEditText.setText(address.getSubLocality());
-        ruaEditText.setText(address.getThoroughfare());
+    private void preencherCamposEndereco(Address endereco) {
+        cepEditText.setText(endereco.getPostalCode());
+        bairroEditText.setText(endereco.getSubLocality());
+        ruaEditText.setText(endereco.getThoroughfare());
+        numeroEditText.setText(endereco.getSubThoroughfare());
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        fileUri = savedInstanceState.getParcelable("PHOTO_URI");
+        fileUri = savedInstanceState.getParcelable(Constants.FILE_URI_KEY);
         if (fileUri != null) {
             setCameraButtonImage();
         }
@@ -109,7 +107,7 @@ public class ProtocoloActivity extends ActionBarActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelable("PHOTO_URI", fileUri);
+        outState.putParcelable(Constants.FILE_URI_KEY, fileUri);
         super.onSaveInstanceState(outState);
     }
 
@@ -139,49 +137,49 @@ public class ProtocoloActivity extends ActionBarActivity {
                             bairroEditText.getText().toString(), ruaEditText.getText().toString(),
                             numeroEditText.getText().toString(), fileUri);
 
-            long novoId = protocolo.save();
-            Log.d("novoProtocolo", "Novo id de protocolo=" + novoId);
-            Uri uri_protocolo = protocolo.getArquivoProtocolo();
+            protocolo.save();
             File arquivo_protocolo = new File(protocolo.getArquivoProtocolo().getPath());
-            Log.d("novoProtocolo", "arquivo_protocolo.getAbsolutePath() " + arquivo_protocolo.getAbsolutePath());
-            Log.d("novoProtocolo", "arquivo_protocolo.getPath() " + arquivo_protocolo.getPath());
-            Log.d("novoProtocolo", "uri_protocolo.getPath() " + uri_protocolo.getPath());
-            Log.d("novoProtocolo", "uri_protocolo.toString() " + uri_protocolo.toString());
             CidadeIluminadaService service = CidadeIluminadaAdapter.getCidadeIluminadaService();
             service.novoProtocolo(protocolo.getCodProtocolo(), protocolo.getCep(),
-                    new TypedFile(Constants.JPG_MIME_TYPE, new File(protocolo.getArquivoProtocolo().getPath())),
+                    new TypedFile(Constants.JPG_MIME_TYPE, arquivo_protocolo),
                     new Callback<CidadeIluminadaApiResponse>() {
                         @Override
                         public void success(CidadeIluminadaApiResponse cidadeIluminadaApiResponse,
                                             Response response) {
                             Log.d("sucess", cidadeIluminadaApiResponse.toString() + " " +
                                     response.toString());
+                            Toast.makeText(getApplicationContext(),
+                                    R.string.protocolo_envio_sucesso, Toast.LENGTH_LONG).show();
                         }
 
                         @Override
                         public void failure(RetrofitError retrofitError) {
+                            Toast.makeText(getApplicationContext(),
+                                    R.string.protocolo_envio_erro,
+                                    Toast.LENGTH_LONG).show();
                             Log.e("error", retrofitError.toString());
                         }
                     });
         } else {
-            Toast.makeText(this, "Existem erros no formulário", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.erro_formulario_protocolo, Toast.LENGTH_SHORT).show();
         }
     }
 
     public void openProtocoloCamera(View view) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        fileUri = getOutputMediaFileUri();
+        fileUri = CameraUtils.getOutputMediaFileUri();
         if (fileUri == null) {
             Log.e("ProtocoloActivity", "Falha ao criar arquivo da foto.");
+            Toast.makeText(this, R.string.erro_criacao_arquivo_foto, Toast.LENGTH_SHORT).show();
             return;
         }
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-        startActivityForResult(intent, Constants.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+        startActivityForResult(intent, Constants.CAMERA_REQUEST_CODE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == Constants.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+        if (requestCode == Constants.CAMERA_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 setCameraButtonImage();
             } else if (resultCode == RESULT_CANCELED) {
@@ -191,60 +189,21 @@ public class ProtocoloActivity extends ActionBarActivity {
         } else if (requestCode == Constants.PLACE_PICKER_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(data, this);
-                Log.d("place", "" + place.getAddress());
                 Geocoder geocoder = new Geocoder(this, Locale.getDefault());
                 try {
                     List<Address> addresses = geocoder.getFromLocation(place.getLatLng().latitude,
                             place.getLatLng().longitude, 1);
-                    fillAddressFields(addresses.get(0));
+                    preencherCamposEndereco(addresses.get(0));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                String toastMsg = String.format("Place: %s", place.getAddress());
-                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
             }
         }
     }
 
     private void setCameraButtonImage() {
         ImageButton img = (ImageButton) findViewById(R.id.openCameraButton);
-        Bitmap bmp = decodeSampledBitmapFromFile(fileUri.getPath(), 128, 128);
+        Bitmap bmp = CameraUtils.decodeSampledBitmapFromFile(fileUri.getPath(), 128, 128);
         img.setImageBitmap(bmp);
-    }
-
-    private Bitmap decodeSampledBitmapFromFile(String path, int requiredWidth, int requiredHeight) {
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        options.inPreferredConfig = Bitmap.Config.RGB_565;
-        int inSampleSize = 1;
-        if (height > requiredHeight) {
-            inSampleSize = Math.round((float)height / (float)requiredHeight);
-        }
-        int expectedWidth = width / inSampleSize;
-        if (expectedWidth > requiredWidth) {
-            inSampleSize = Math.round((float)width / (float)requiredWidth);
-        }
-        options.inSampleSize = inSampleSize;
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(path, options);
-    }
-
-    private Uri getOutputMediaFileUri(){
-        if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            return null;
-        }
-        File mediaStorageDir =
-                new File(Environment.getExternalStoragePublicDirectory(
-                         Environment.DIRECTORY_PICTURES), Constants.APPLICATION_NAME);
-        if (!mediaStorageDir.exists()){
-            if (!mediaStorageDir.mkdirs()){
-                return null;
-            }
-        }
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        return Uri.fromFile(new File(mediaStorageDir.getPath() +
-                            File.separator + "IMG_"+ timeStamp + ".jpg"));
     }
 }

@@ -22,13 +22,13 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:onClick="openProtocoloCamera"
-            android:contentDescription="@string/openCameraButtonContentDescription" />
+            android:contentDescription="@string/content_description_button_camera" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/descricaoProtocoloLabel"
+            android:text="@string/label_descricao_protocolo"
             android:id="@+id/descricaoProtocoloLabel"
             android:layout_below="@+id/openGalleryButton"
             android:layout_alignParentStart="true"
@@ -49,7 +49,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/openGalleryButtonLabel"
+            android:text="@string/label_button_protocolo_galeria"
             android:id="@+id/openGalleryButton"
             android:layout_below="@+id/openCameraButton"
             android:layout_alignStart="@+id/openCameraButton"
@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/protocoloAddressSectionLabel"
+            android:text="@string/label_protocolo_secao_endereco"
             android:id="@+id/enderecoProtocoloLabel"
             android:layout_below="@+id/protocoloDescricaoEditText"
             android:layout_alignParentStart="true" />
@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/protocoloCEPLabel"
+            android:text="@string/label_protocolo_endereco_cep"
             android:id="@+id/cepProtocoloLabel"
             android:layout_marginTop="25dp"
             android:layout_below="@+id/enderecoProtocoloLabel"
@@ -85,13 +85,13 @@
             android:layout_alignBaseline="@+id/cepProtocoloLabel"
             android:layout_alignStart="@+id/numeroEditText"
             android:inputType="number"
-            android:hint="12210-090" />
+            android:hint="@string/hint_cep" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/protocoloBairroLabel"
+            android:text="@string/label_protocolo_endereco_bairro"
             android:id="@+id/bairroProtocoloLabel"
             android:layout_below="@+id/cepEditText"
             android:layout_alignParentStart="true" />
@@ -105,13 +105,13 @@
             android:inputType="text"
             android:layout_alignParentEnd="true"
             android:layout_alignStart="@+id/numeroEditText"
-            android:hint="Centro" />
+            android:hint="@string/hint_bairro" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/protocoloRuaLabel"
+            android:text="@string/label_protocolo_endereco_rua"
             android:id="@+id/ruaProtocoloLabel"
             android:labelFor="@+id/ruaEditText"
             android:layout_below="@+id/bairroEditText"
@@ -126,13 +126,13 @@
             android:layout_alignBaseline="@id/ruaProtocoloLabel"
             android:layout_alignStart="@+id/numeroEditText"
             android:layout_alignParentEnd="true"
-            android:hint="Praça Afonso Pena" />
+            android:hint="@string/hint_rua" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/protocoloNumeroLabel"
+            android:text="@string/label_protocolo_endereco_numero"
             android:id="@+id/numeroProtocoloLabel"
             android:layout_below="@+id/ruaEditText"
             android:layout_alignParentStart="true" />
@@ -146,14 +146,14 @@
             android:layout_alignBaseline="@+id/numeroProtocoloLabel"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="@dimen/protocoloEnderecoFieldsMargin"
-            android:hint="59"
+            android:hint="@string/hint_numero"
             android:inputType="number" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/protocoloPlacePickerButtonLabel"
+            android:text="@string/label_button_protocolo_escolher_lugar"
             android:onClick="openPlacePicker"
             android:id="@+id/openPlacePickerButton"
             android:layout_alignParentEnd="true"

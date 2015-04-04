@@ -26,4 +26,5 @@ dependencies {
     compile files('libs/gson-2.3.1.jar')
     compile files('libs/sugar-1.4_beta.jar')
     compile files('libs/retrofit-1.9.0.jar')
+    compile files('libs/joda-time-2.7.jar')
 }

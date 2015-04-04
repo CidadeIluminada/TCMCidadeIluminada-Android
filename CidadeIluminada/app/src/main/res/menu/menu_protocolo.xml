@@ -4,10 +4,10 @@
     tools:context="br.com.bilac.tcm.cidadeiluminada.protocolos.ProtocoloActivity">
     <item
         android:id="@+id/action_novo_protocolo"
-        android:icon="@drawable/ic_action_new"
-        android:title="@string/novoProtocoloActionLabel"
+        android:icon="@drawable/ic_action_send_now"
+        android:title="@string/label_action_novo_protocolo"
         app:showAsAction="withText|ifRoom"
     />
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+    <item android:id="@+id/action_settings" android:title="@string/label_action_configuracoes"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>
