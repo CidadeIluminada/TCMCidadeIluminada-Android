@@ -1,17 +1,14 @@
 package br.com.bilac.tcm.cidadeiluminada.protocolos;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.ResultReceiver;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,11 +19,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
@@ -40,7 +34,6 @@ import java.util.Locale;
 import br.com.bilac.tcm.cidadeiluminada.Constants;
 import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
-import br.com.bilac.tcm.cidadeiluminada.protocolos.services.FetchAddressIntentService;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.validators.EmptyValidator;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.validators.ValidationState;
 import br.com.bilac.tcm.cidadeiluminada.services.CidadeIluminadaAdapter;
@@ -51,8 +44,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.mime.TypedFile;
 
-public class ProtocoloActivity extends ActionBarActivity implements
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class ProtocoloActivity extends ActionBarActivity {
 
     private Uri fileUri;
 
@@ -64,9 +56,6 @@ public class ProtocoloActivity extends ActionBarActivity implements
     private EditText bairroEditText;
     private EditText ruaEditText;
     private EditText numeroEditText;
-
-    private GoogleApiClient googleApiClient;
-    private Location lastLocation;
 
     public void openPlacePicker(View view) {
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
@@ -80,30 +69,14 @@ public class ProtocoloActivity extends ActionBarActivity implements
         }
     }
 
-    private class AddressResultReceiver extends ResultReceiver {
-
-        private AddressResultReceiver(Handler handler) {
-            super(handler);
-        }
-
-        @Override
-        protected void onReceiveResult(int resultCode, Bundle resultData) {
-            if (resultCode == Constants.SUCESS_RESULT) {
-                Address address = resultData.getParcelable(Constants.RESULT_DATA_KEY);
-            }
-        }
-    }
-
     private void fillAddressFields(Address address) {
         cepEditText.setText(address.getPostalCode());
         bairroEditText.setText(address.getSubLocality());
         ruaEditText.setText(address.getThoroughfare());
     }
 
-    private AddressResultReceiver addressResultReceiver;
-
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
         fileUri = savedInstanceState.getParcelable("PHOTO_URI");
@@ -115,10 +88,6 @@ public class ProtocoloActivity extends ActionBarActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        buildGoogleApiClient();
-        googleApiClient.connect();
-        addressResultReceiver = new AddressResultReceiver(new Handler());
 
         descricaoValidationState = new ValidationState();
         cepValidationState = new ValidationState();
@@ -138,21 +107,6 @@ public class ProtocoloActivity extends ActionBarActivity implements
                 numeroValidationState));
     }
 
-    protected synchronized void buildGoogleApiClient() {
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-    }
-
-    private void startIntentService() {
-        Intent intent = new Intent(this, FetchAddressIntentService.class);
-        intent.putExtra(Constants.RECEIVER, addressResultReceiver);
-        intent.putExtra(Constants.LOCATION_DATA_EXTRA, lastLocation);
-        startService(intent);
-    }
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putParcelable("PHOTO_URI", fileUri);
@@ -163,7 +117,7 @@ public class ProtocoloActivity extends ActionBarActivity implements
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_protocolo, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -175,12 +129,6 @@ public class ProtocoloActivity extends ActionBarActivity implements
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        googleApiClient.disconnect();
     }
 
     private void enviarNovoProtocolo() {
@@ -299,27 +247,4 @@ public class ProtocoloActivity extends ActionBarActivity implements
         return Uri.fromFile(new File(mediaStorageDir.getPath() +
                             File.separator + "IMG_"+ timeStamp + ".jpg"));
     }
-
-    @Override
-    public void onConnected(Bundle bundle) {
-        lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
-        if (lastLocation != null) {
-            Log.d("onconnected", "lat=" + lastLocation.getLatitude() + " lon=" + lastLocation.getLongitude());
-            startIntentService();
-        } else {
-            Log.d("onconnected", "location null");
-        }
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-        Log.d("connectionFailed", "Google API connection Failed: " + connectionResult.toString());
-    }
-
-
 }
