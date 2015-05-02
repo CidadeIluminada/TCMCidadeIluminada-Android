@@ -1,0 +1,42 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+        android:key="preference_modo_identificado"
+        android:title="@string/pref_modo_identificado"
+        android:summaryOn="@string/pref_modo_identificado_on"
+        android:summaryOff="@string/pref_modo_identificado_off"
+        android:defaultValue="false"
+        />
+
+    <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
+    <EditTextPreference
+        android:dependency="preference_modo_identificado"
+        android:key="preference_nome_usuario"
+        android:title="@string/pref_nome"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:selectAllOnFocus="true"
+        android:defaultValue=""
+        />
+
+    <EditTextPreference
+        android:dependency="preference_modo_identificado"
+        android:key="preference_email_usuario"
+        android:title="@string/pref_email"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:selectAllOnFocus="true"
+        android:inputType="textEmailAddress"
+        android:defaultValue=""
+        />
+
+    <EditTextPreference
+        android:key="preference_cep"
+        android:title="@string/pref_cep"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:selectAllOnFocus="true"
+        android:defaultValue=""
+        />
+
+</PreferenceScreen>

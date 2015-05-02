@@ -8,6 +8,6 @@
         android:title="@string/label_action_novo_protocolo"
         app:showAsAction="withText|ifRoom"
     />
-    <item android:id="@+id/action_settings" android:title="@string/label_action_configuracoes"
+    <item android:id="@+id/action_settings" android:title="@string/label_action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>

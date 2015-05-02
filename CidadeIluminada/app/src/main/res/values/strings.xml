@@ -5,9 +5,9 @@
     <string name="label_abrir_novo_protocolo">Fazer denuncia</string>
     <string name="label_action_novo_protocolo">Enviar Protocolo</string>
 
-    <string name="title_activity_configure">Configurações</string>
-    <string name="label_abrir_configuracoes">Configurações</string>
-    <string name="label_action_configuracoes">Configurações</string>
+    <string name="title_activity_settings">Configurações</string>
+    <string name="label_abrir_settings">Configurações</string>
+    <string name="label_action_settings">Configurações</string>
 
     <string name="title_activity_protocolos_lista">Consultar Protocolos</string>
     <string name="label_abrir_lista_protocolos">Consultar Protocolos</string>
@@ -32,5 +32,12 @@
     <string name="protocolo_envio_erro">Houve um erro na comunicação com o servidor. Por favor, tente novamente mais tarde</string>
     <string name="erro_formulario_protocolo">Existem erros no preenchimento do formulário</string>
     <string name="erro_criacao_arquivo_foto">Erro ao criar o arquivo da foto</string>
+
+    <string name="pref_modo_identificado_off">Não envia informações de identificação junto dos protocolos.</string>
+    <string name="pref_modo_identificado_on">Envia informações de identificação junto dos protocolos.</string>
+    <string name="pref_modo_identificado">Modo identificado</string>
+    <string name="pref_email">E-Mail</string>
+    <string name="pref_cep">CEP Padrão</string>
+    <string name="pref_nome">Nome</string>
 
 </resources>

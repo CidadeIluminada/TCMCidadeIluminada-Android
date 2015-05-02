@@ -33,7 +33,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:text="@string/label_abrir_configuracoes"
+        android:text="@string/label_abrir_settings"
         android:id="@+id/openSettingsButton"
         android:onClick="openConfiguracoesActivity"
         android:drawableStart="@drawable/settings48"
