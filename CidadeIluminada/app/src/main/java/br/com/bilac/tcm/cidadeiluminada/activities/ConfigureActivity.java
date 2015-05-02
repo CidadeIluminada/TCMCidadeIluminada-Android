@@ -1,9 +1,11 @@
-package br.com.bilac.tcm.cidadeiluminada;
+package br.com.bilac.tcm.cidadeiluminada.activities;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import br.com.bilac.tcm.cidadeiluminada.R;
 
 
 public class ConfigureActivity extends ActionBarActivity {

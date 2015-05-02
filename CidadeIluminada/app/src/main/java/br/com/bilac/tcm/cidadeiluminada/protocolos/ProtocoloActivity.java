@@ -77,7 +77,7 @@ public class ProtocoloActivity extends ActionBarActivity {
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        fileUri = savedInstanceState.getParcelable(Constants.FILE_URI_KEY);
+        fileUri = savedInstanceState.getParcelable(Constants.KEY_FILE_URI);
         if (fileUri != null) {
             setCameraButtonImage();
         }
@@ -107,7 +107,7 @@ public class ProtocoloActivity extends ActionBarActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelable(Constants.FILE_URI_KEY, fileUri);
+        outState.putParcelable(Constants.KEY_FILE_URI, fileUri);
         super.onSaveInstanceState(outState);
     }
 

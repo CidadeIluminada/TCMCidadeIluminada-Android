@@ -1,4 +1,4 @@
-package br.com.bilac.tcm.cidadeiluminada;
+package br.com.bilac.tcm.cidadeiluminada.activities;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import br.com.bilac.tcm.cidadeiluminada.R;
+import br.com.bilac.tcm.cidadeiluminada.activities.ConfigureActivity;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.ProtocoloActivity;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.ProtocolosListaActivity;
 

@@ -40,7 +40,7 @@ public class CameraUtils {
         }
         File mediaStorageDir =
                 new File(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES), Constants.APPLICATION_NAME);
+                        Environment.DIRECTORY_PICTURES), Constants.PACKAGE);
         if (!mediaStorageDir.exists()){
             if (!mediaStorageDir.mkdirs()){
                 return null;
