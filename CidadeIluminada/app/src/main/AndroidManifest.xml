@@ -47,14 +47,6 @@
                 android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.ConfigureActivity"
-            android:label="@string/title_activity_configure"
-            android:parentActivityName=".activities.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MainActivity" />
-        </activity>
-        <activity
             android:name=".protocolos.ProtocolosListaActivity"
             android:label="@string/title_activity_protocolos_lista"
             android:parentActivityName=".activities.MainActivity" >

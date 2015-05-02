@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import br.com.bilac.tcm.cidadeiluminada.R;
-import br.com.bilac.tcm.cidadeiluminada.activities.ConfigureActivity;
+//import br.com.bilac.tcm.cidadeiluminada.activities.ConfigureActivity;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.ProtocoloActivity;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.ProtocolosListaActivity;
 
@@ -53,6 +53,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void openConfiguracoesActivity(View view) {
-        startActivity(new Intent(this, ConfigureActivity.class));
+        //startActivity(new Intent(this, ConfigureActivity.class));
     }
 }
