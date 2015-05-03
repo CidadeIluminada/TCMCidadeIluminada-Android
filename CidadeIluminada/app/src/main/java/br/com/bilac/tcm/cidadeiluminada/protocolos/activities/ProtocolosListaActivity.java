@@ -1,4 +1,4 @@
-package br.com.bilac.tcm.cidadeiluminada.protocolos;
+package br.com.bilac.tcm.cidadeiluminada.protocolos.activities;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;

@@ -48,7 +48,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".protocolos.ProtocoloActivity"
+            android:name=".protocolos.activities.ProtocoloActivity"
             android:label="@string/title_activity_protocolo"
             android:parentActivityName=".activities.MainActivity" >
             <meta-data
@@ -56,7 +56,7 @@
                 android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".protocolos.ProtocolosListaActivity"
+            android:name=".protocolos.activities.ProtocolosListaActivity"
             android:label="@string/title_activity_protocolos_lista"
             android:parentActivityName=".activities.MainActivity" >
             <meta-data

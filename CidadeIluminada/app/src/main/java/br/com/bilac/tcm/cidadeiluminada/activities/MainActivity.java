@@ -9,8 +9,8 @@ import android.view.View;
 
 import br.com.bilac.tcm.cidadeiluminada.R;
 //import br.com.bilac.tcm.cidadeiluminada.activities.ConfigureActivity;
-import br.com.bilac.tcm.cidadeiluminada.protocolos.ProtocoloActivity;
-import br.com.bilac.tcm.cidadeiluminada.protocolos.ProtocolosListaActivity;
+import br.com.bilac.tcm.cidadeiluminada.protocolos.activities.ProtocoloActivity;
+import br.com.bilac.tcm.cidadeiluminada.protocolos.activities.ProtocolosListaActivity;
 
 
 public class MainActivity extends ActionBarActivity {

@@ -1,4 +1,4 @@
-package br.com.bilac.tcm.cidadeiluminada.protocolos;
+package br.com.bilac.tcm.cidadeiluminada.protocolos.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
