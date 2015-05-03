@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/previewItemProtocolo"
+        android:src="@drawable/cameraadd64"
+        android:focusableInTouchMode="false"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/numeroItemProtocolo"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/descricaoItemProtocolo"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/statusItemProtocolo"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/abrirDetalhesProtocolo"
+        android:src="@drawable/ic_action_next_item"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>
