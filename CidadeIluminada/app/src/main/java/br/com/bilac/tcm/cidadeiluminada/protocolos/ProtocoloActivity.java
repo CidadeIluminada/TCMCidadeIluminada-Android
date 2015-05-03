@@ -106,8 +106,7 @@ public class ProtocoloActivity extends ActionBarActivity {
         numeroEditText.addTextChangedListener(new EmptyValidator(numeroEditText,
                 numeroValidationState));
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String preference_cep = sharedPreferences.getString(Constants.CEP_PREFERENCE_KEY, "");
+        String preference_cep = getSharedPreferences().getString(Constants.CEP_PREFERENCE_KEY, "");
 
         if (preference_cep != null && !preference_cep.isEmpty()) {
             cepEditText.setText(preference_cep);
@@ -138,6 +137,29 @@ public class ProtocoloActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private SharedPreferences getSharedPreferences() {
+        return PreferenceManager.getDefaultSharedPreferences(this);
+    }
+
+    private class CidadeIluminadaCallback implements Callback<CidadeIluminadaApiResponse> {
+
+        @Override
+        public void success(CidadeIluminadaApiResponse cidadeIluminadaApiResponse,
+                            Response response) {
+            Log.d("sucess", cidadeIluminadaApiResponse.toString() + " " +
+                    response.toString());
+            Toast.makeText(getApplicationContext(),
+                    R.string.protocolo_envio_sucesso, Toast.LENGTH_LONG).show();
+        }
+        @Override
+        public void failure(RetrofitError retrofitError) {
+            Toast.makeText(getApplicationContext(),
+                    R.string.protocolo_envio_erro,
+                    Toast.LENGTH_LONG).show();
+            Log.e("error", retrofitError.toString());
+        }
+    }
+
     private void enviarNovoProtocolo() {
         if (descricaoValidationState.isValid() && numeroValidationState.isValid()
                 && cepValidationState.isValid() && fileUri != null) {
@@ -147,28 +169,32 @@ public class ProtocoloActivity extends ActionBarActivity {
                             numeroEditText.getText().toString(), fileUri);
 
             protocolo.save();
-            File arquivo_protocolo = new File(protocolo.getArquivoProtocolo().getPath());
-            CidadeIluminadaService service = CidadeIluminadaAdapter.getCidadeIluminadaService();
-            service.novoProtocolo(protocolo.getCodProtocolo(), protocolo.getCep(),
-                    new TypedFile(Constants.JPG_MIME_TYPE, arquivo_protocolo),
-                    new Callback<CidadeIluminadaApiResponse>() {
-                        @Override
-                        public void success(CidadeIluminadaApiResponse cidadeIluminadaApiResponse,
-                                            Response response) {
-                            Log.d("sucess", cidadeIluminadaApiResponse.toString() + " " +
-                                    response.toString());
-                            Toast.makeText(getApplicationContext(),
-                                    R.string.protocolo_envio_sucesso, Toast.LENGTH_LONG).show();
-                        }
 
-                        @Override
-                        public void failure(RetrofitError retrofitError) {
-                            Toast.makeText(getApplicationContext(),
-                                    R.string.protocolo_envio_erro,
-                                    Toast.LENGTH_LONG).show();
-                            Log.e("error", retrofitError.toString());
-                        }
-                    });
+            CidadeIluminadaService service = CidadeIluminadaAdapter.getCidadeIluminadaService();
+
+            TypedFile arquivoProtocolo = new TypedFile(Constants.JPG_MIME_TYPE,
+                    new File(protocolo.getArquivoProtocolo().getPath()));
+            String codProtocolo = protocolo.getCodProtocolo();
+            String cep = protocolo.getCep();
+            String logradouro = protocolo.getLogradouro();
+            String estado = protocolo.getEstado();
+            String cidade = protocolo.getCidade();
+            String bairro = protocolo.getBairro();
+            String numero = protocolo.getNumero();
+
+            SharedPreferences preferences = getSharedPreferences();
+            boolean anonimo = preferences.getBoolean(Constants.ANONIMO_PREFERENCE_KEY, true);
+            if (anonimo) {
+                service.novoProtocolo(codProtocolo, cep, logradouro, cidade, bairro, numero, estado,
+                        arquivoProtocolo, new CidadeIluminadaCallback());
+            } else {
+                String nome = preferences.getString(Constants.NOME_PREFERENCE_KEY, "");
+                String email = preferences.getString(Constants.EMAIL_PREFERENCE_KEY, "");
+
+                service.novoProtocoloIdentificado(codProtocolo, cep, logradouro, cidade, bairro,
+                        numero, estado, nome, email, arquivoProtocolo,
+                        new CidadeIluminadaCallback());
+            }
         } else {
             Toast.makeText(this, R.string.erro_formulario_protocolo, Toast.LENGTH_SHORT).show();
         }

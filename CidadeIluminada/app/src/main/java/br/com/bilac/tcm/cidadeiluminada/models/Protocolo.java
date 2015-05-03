@@ -57,4 +57,20 @@ public class Protocolo extends SugarRecord {
     public Uri getArquivoProtocolo() {
         return Uri.parse(arquivo_protocolo);
     }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
 }
