@@ -67,6 +67,10 @@
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".activities.MainActivity" >
+            <intent-filter>
+                <action android:name="ANDROID.INTENT.ACTION.MANAGE_NETWORK_USAGE"/>
+                <category android:name="ANDROID.INTENT.CATEGORY.DEFAULT"/>
+            </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.bilac.tcm.cidadeiluminada.activities.MainActivity" />
