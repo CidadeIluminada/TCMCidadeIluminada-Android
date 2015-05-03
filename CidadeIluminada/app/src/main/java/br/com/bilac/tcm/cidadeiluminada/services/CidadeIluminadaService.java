@@ -21,6 +21,7 @@ public interface CidadeIluminadaService {
                        @Part("bairro") String bairro,
                        @Part("numero") String numero,
                        @Part("estado") String estado,
+                       @Part("descricao") String descricao,
                        @Part("arquivo_protocolo") TypedFile arquivo_protocolo,
                        Callback<CidadeIluminadaApiResponse> callback);
     @Multipart
@@ -32,6 +33,7 @@ public interface CidadeIluminadaService {
                                    @Part("bairro") String bairro,
                                    @Part("numero") String numero,
                                    @Part("estado") String estado,
+                                   @Part("descricao") String descricao,
                                    @Part("nome") String nome,
                                    @Part("email") String email,
                                    @Part("arquivo_protocolo") TypedFile arquivo_protocolo,

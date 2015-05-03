@@ -166,7 +166,8 @@ public class ProtocoloActivity extends ActionBarActivity {
             Protocolo protocolo =
                     Protocolo.novoProtocoloSJC(cepEditText.getText().toString(),
                             bairroEditText.getText().toString(), ruaEditText.getText().toString(),
-                            numeroEditText.getText().toString(), fileUri);
+                            numeroEditText.getText().toString(),
+                            descricaoEditText.getText().toString(), fileUri);
 
             protocolo.save();
 
@@ -181,19 +182,21 @@ public class ProtocoloActivity extends ActionBarActivity {
             String cidade = protocolo.getCidade();
             String bairro = protocolo.getBairro();
             String numero = protocolo.getNumero();
+            String descricao = protocolo.getDescricao();
+
+            CidadeIluminadaCallback callback = new CidadeIluminadaCallback();
 
             SharedPreferences preferences = getSharedPreferences();
             boolean anonimo = preferences.getBoolean(Constants.ANONIMO_PREFERENCE_KEY, true);
             if (anonimo) {
                 service.novoProtocolo(codProtocolo, cep, logradouro, cidade, bairro, numero, estado,
-                        arquivoProtocolo, new CidadeIluminadaCallback());
+                        descricao, arquivoProtocolo, callback);
             } else {
                 String nome = preferences.getString(Constants.NOME_PREFERENCE_KEY, "");
                 String email = preferences.getString(Constants.EMAIL_PREFERENCE_KEY, "");
 
                 service.novoProtocoloIdentificado(codProtocolo, cep, logradouro, cidade, bairro,
-                        numero, estado, nome, email, arquivoProtocolo,
-                        new CidadeIluminadaCallback());
+                        numero, estado, descricao, nome, email, arquivoProtocolo, callback);
             }
         } else {
             Toast.makeText(this, R.string.erro_formulario_protocolo, Toast.LENGTH_SHORT).show();
