@@ -15,4 +15,8 @@ public final class Constants {
 
     public static final String PHOTO_EXTENSION = ".jpg";
     public static final String JPG_MIME_TYPE = "image/jpeg";
+
+    public static final String CEP_PREFERENCE_KEY = "preference_cep";
+    public static final String NOME_PREFERENCE_KEY = "preference_nome";
+    public static final String EMAIL_PREFERENCE_KEY = "preference_email";
 }

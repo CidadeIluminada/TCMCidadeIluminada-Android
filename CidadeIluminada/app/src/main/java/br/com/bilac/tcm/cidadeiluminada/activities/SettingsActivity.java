@@ -6,6 +6,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.ActionBarActivity;
 
+import br.com.bilac.tcm.cidadeiluminada.Constants;
 import br.com.bilac.tcm.cidadeiluminada.R;
 
 public class SettingsActivity extends ActionBarActivity {
@@ -45,8 +46,9 @@ public class SettingsActivity extends ActionBarActivity {
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (key.equals("preference_cep") || key.equals("preference_nome") ||
-                    key.equals("preference_email")) {
+            if (key.equals(Constants.CEP_PREFERENCE_KEY) ||
+                    key.equals(Constants.NOME_PREFERENCE_KEY) ||
+                    key.equals(Constants.EMAIL_PREFERENCE_KEY)) {
                 Preference preference = findPreference(key);
                 preference.setSummary(sharedPreferences.getString(key, ""));
             }

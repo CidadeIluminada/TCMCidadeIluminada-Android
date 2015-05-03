@@ -1,10 +1,12 @@
 package br.com.bilac.tcm.cidadeiluminada.protocolos;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
@@ -103,6 +105,13 @@ public class ProtocoloActivity extends ActionBarActivity {
         cepEditText.addTextChangedListener(new EmptyValidator(cepEditText, cepValidationState));
         numeroEditText.addTextChangedListener(new EmptyValidator(numeroEditText,
                 numeroValidationState));
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String preference_cep = sharedPreferences.getString(Constants.CEP_PREFERENCE_KEY, "");
+
+        if (preference_cep != null && !preference_cep.isEmpty()) {
+            cepEditText.setText(preference_cep);
+        }
     }
 
     @Override
