@@ -27,7 +27,14 @@ public class SettingsActivity extends ActionBarActivity {
         public void onCreate(Bundle paramBundle) {
             super.onCreate(paramBundle);
             addPreferencesFromResource(R.xml.pref_general);
-            getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+            SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
+            sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+            findPreference(Constants.CEP_PREFERENCE_KEY)
+                    .setSummary(sharedPreferences.getString(Constants.CEP_PREFERENCE_KEY, ""));
+            findPreference(Constants.NOME_PREFERENCE_KEY)
+                    .setSummary(sharedPreferences.getString(Constants.NOME_PREFERENCE_KEY, ""));
+            findPreference(Constants.EMAIL_PREFERENCE_KEY)
+                    .setSummary(sharedPreferences.getString(Constants.EMAIL_PREFERENCE_KEY, ""));
         }
 
         @Override
@@ -49,8 +56,7 @@ public class SettingsActivity extends ActionBarActivity {
             if (key.equals(Constants.CEP_PREFERENCE_KEY) ||
                     key.equals(Constants.NOME_PREFERENCE_KEY) ||
                     key.equals(Constants.EMAIL_PREFERENCE_KEY)) {
-                Preference preference = findPreference(key);
-                preference.setSummary(sharedPreferences.getString(key, ""));
+                findPreference(key).setSummary(sharedPreferences.getString(key, ""));
             }
         }
     }
