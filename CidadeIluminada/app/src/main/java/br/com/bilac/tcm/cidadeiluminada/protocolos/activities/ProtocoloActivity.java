@@ -1,4 +1,4 @@
-package br.com.bilac.tcm.cidadeiluminada.protocolos.activities;
+package br.com.bilac.tcm.cidadeiluminada.protocolos;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -80,7 +80,7 @@ public class ProtocoloActivity extends Activity {
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        fileUri = savedInstanceState.getParcelable(Constants.KEY_FILE_URI);
+        fileUri = savedInstanceState.getParcelable(Constants.FILE_URI_KEY);
         if (fileUri != null) {
             setCameraButtonImage();
         }
@@ -116,7 +116,7 @@ public class ProtocoloActivity extends Activity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelable(Constants.KEY_FILE_URI, fileUri);
+        outState.putParcelable(Constants.FILE_URI_KEY, fileUri);
         super.onSaveInstanceState(outState);
     }
 

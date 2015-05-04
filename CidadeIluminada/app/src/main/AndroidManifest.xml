@@ -6,16 +6,13 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<<<<<<< HEAD
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-=======
     <uses-permission android:name="ANDROID.PERMISSION.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
->>>>>>> 993d8cd9976fb1fc21c453335a00ebdaf0746e52
 
     <application
         android:name="com.orm.SugarApp"
@@ -23,9 +20,7 @@
         android:icon="@mipmap/ic_launcher"
         android:logo="@drawable/cidadeiiuminada_logo"
         android:label="@string/app_name"
-<<<<<<< HEAD
-        android:theme="@android:style/Theme.Holo.Light"
-        android:name="com.orm.SugarApp">
+        android:theme="@android:style/Theme.Holo.Light">
 
         <meta-data android:name="QUERY_LOG" android:value="true"/>
         <meta-data android:name="DATABASE" android:value="cidadeiluminada"/>
@@ -33,9 +28,9 @@
         <meta-data android:name="DOMAIN_PAKAGE_NAME"
             android:value="br.com.bilac.tcm.cidadeiluminada.models"/>
 
-        <meta-data android:name="com.google.android.gms.version"
-=======
-        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:theme="@style/AppTheme" >
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />
@@ -50,22 +45,16 @@
             android:value="br.com.bilac.tcm.cidadeiluminada.models" />
         <meta-data
             android:name="com.google.android.gms.version"
->>>>>>> 993d8cd9976fb1fc21c453335a00ebdaf0746e52
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDa6X_wTRG993CeCQuSmw8XM5tDjDGYmcQ" />
         <!-- CE:9C:BD:C4:96:FB:74:24:35:7C:48:91:D4:8E:3B:2C:F1:CB:6F:A9 -->
         <activity
-<<<<<<< HEAD
             android:name=".SplashScreen"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.NoActionBar">
-=======
-            android:name=".activities.MainActivity"
-            android:label="@string/app_name" >
->>>>>>> 993d8cd9976fb1fc21c453335a00ebdaf0746e52
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -73,7 +62,7 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
         </activity>
@@ -81,21 +70,20 @@
         <activity
             android:name=".protocolos.activities.ProtocoloActivity"
             android:label="@string/title_activity_protocolo"
-<<<<<<< HEAD
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme">
-=======
+
             android:parentActivityName=".activities.MainActivity" >
->>>>>>> 993d8cd9976fb1fc21c453335a00ebdaf0746e52
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
+
         <activity
-<<<<<<< HEAD
             android:name=".ConfigureActivity"
             android:label="@string/title_activity_configure"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme">
 =======
             android:name=".protocolos.activities.ProtocolosListaActivity"
@@ -107,16 +95,18 @@
                 android:value=".activities.MainActivity" />
         </activity>
         <activity
-<<<<<<< HEAD
             android:name=".protocolos.ProtocolosListaActivity"
             android:label="@string/title_activity_protocolos_lista"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.bilac.tcm.cidadeiluminada.MainActivity"
                 android:theme="@style/AppTheme"/>
-=======
+
+
+
+            <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".activities.MainActivity" >
