@@ -1,13 +1,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="br.com.bilac.tcm.cidadeiluminada.protocolos.activities.ProtocoloActivity">
-    <item
+    tools:context="br.com.bilac.tcm.cidadeiluminada.protocolos.ProtocoloActivity">
+
+
+       <item
         android:id="@+id/action_novo_protocolo"
-        android:icon="@drawable/ic_action_send_now"
+        android:icon="@drawable/ic_send_white_36dp"
         android:title="@string/label_action_novo_protocolo"
-        app:showAsAction="withText|ifRoom"
-    />
-    <item android:id="@+id/action_settings" android:title="@string/label_action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+        android:showAsAction="ifRoom"
+        />
+
+
+    <item
+        android:id="@+id/action_settings"
+        android:onClick="openConfiguracoesActivity"
+        android:title="Configurações"
+        android:orderInCategory="100" android:showAsAction="never" />
+
 </menu>

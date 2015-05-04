@@ -1,8 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-    </style>
+    <string name="appname">cidadeIluminada</string>
+    <string name="site">www.cidadeiluminada.com.br</string>
+    <color name="branca">#ffffff</color>
+    <color name="laranja">#fff79335</color>
+    <color name="azul">#ff12647f</color>
+    <color name="preto">#333333</color>
+    <color name="buttonSuccess">#ff1eb64d</color>
+    <color name="buttonSave">#ff156fff</color>
+    <color name="cinza">#333</color>
 
 </resources>
+

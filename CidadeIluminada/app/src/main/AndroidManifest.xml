@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="ANDROID.PERMISSION.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -17,8 +18,10 @@
         android:name="com.orm.SugarApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:logo="@drawable/cidadeiiuminada_logo"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/Theme.Holo.Light">
+
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />
@@ -39,22 +42,42 @@
             android:value="AIzaSyDa6X_wTRG993CeCQuSmw8XM5tDjDGYmcQ" />
         <!-- CE:9C:BD:C4:96:FB:74:24:35:7C:48:91:D4:8E:3B:2C:F1:CB:6F:A9 -->
         <activity
-            android:name=".activities.MainActivity"
-            android:label="@string/app_name" >
+            android:name=".SplashScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
+        </activity>
+
         <activity
             android:name=".protocolos.activities.ProtocoloActivity"
             android:label="@string/title_activity_protocolo"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+
             android:parentActivityName=".activities.MainActivity" >
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
+
+        <activity
+            android:name=".ConfigureActivity"
+            android:label="Configurações"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme" />
+
+
         <activity
             android:name=".protocolos.activities.ProtocolosListaActivity"
             android:label="@string/title_activity_protocolos_lista"
@@ -63,7 +86,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
+
         <activity
+            android:name=".protocolos.ProtocolosListaActivity"
+            android:label="@string/title_activity_protocolos_lista"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.bilac.tcm.cidadeiluminada.activities.MainActivity"
+                android:theme="@style/AppTheme"/>
+            <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".activities.MainActivity" >

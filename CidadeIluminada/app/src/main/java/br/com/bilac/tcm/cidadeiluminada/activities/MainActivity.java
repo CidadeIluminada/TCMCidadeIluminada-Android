@@ -1,5 +1,6 @@
 package br.com.bilac.tcm.cidadeiluminada.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -13,7 +14,7 @@ import br.com.bilac.tcm.cidadeiluminada.protocolos.activities.ProtocoloActivity;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.activities.ProtocolosListaActivity;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -2,7 +2,7 @@
     <string name="app_name">Cidade Iluminada</string>
 
     <string name="title_activity_protocolo">Nova denúncia</string>
-    <string name="label_abrir_novo_protocolo">Fazer denuncia</string>
+    <string name="label_abrir_novo_protocolo">Denunciar</string>
     <string name="label_action_novo_protocolo">Enviar Protocolo</string>
 
     <string name="title_activity_settings">Configurações</string>
@@ -10,13 +10,13 @@
     <string name="label_action_settings">Configurações</string>
 
     <string name="title_activity_protocolos_lista">Consultar Protocolos</string>
-    <string name="label_abrir_lista_protocolos">Consultar Protocolos</string>
+    <string name="label_abrir_lista_protocolos">Consultar</string>
 
     <string name="content_description_button_camera">Nova foto</string>
     <string name="label_button_protocolo_galeria">Galeria</string>
     <string name="label_button_protocolo_escolher_lugar">Selecionar lugar</string>
 
-    <string name="label_descricao_protocolo">Descrição</string>
+    <string name="label_descricao_protocolo"> Descrição:</string>
     <string name="label_protocolo_secao_endereco">Endereço</string>
     <string name="label_protocolo_endereco_cep">CEP</string>
     <string name="label_protocolo_endereco_bairro">Bairro</string>
