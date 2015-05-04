@@ -142,6 +142,9 @@ public class ProtocoloActivity extends Activity {
         return PreferenceManager.getDefaultSharedPreferences(this);
     }
 
+    public void openConfiguracoesActivity(MenuItem item) {
+    }
+
     private class CidadeIluminadaCallback implements Callback<CidadeIluminadaApiResponse> {
 
         @Override
