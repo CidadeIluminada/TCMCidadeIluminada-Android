@@ -11,7 +11,10 @@
         />
 
 
-    <item android:id="@+id/action_settings" android:title="Configurações"
+    <item
+        android:id="@+id/action_settings"
+        android:onClick="openConfiguracoesActivity"
+        android:title="Configurações"
         android:orderInCategory="100" android:showAsAction="never" />
 
 </menu>

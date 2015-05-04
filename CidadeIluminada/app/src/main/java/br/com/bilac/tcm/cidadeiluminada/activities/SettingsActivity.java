@@ -1,5 +1,6 @@
 package br.com.bilac.tcm.cidadeiluminada.activities;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -9,7 +10,7 @@ import android.support.v7.app.ActionBarActivity;
 import br.com.bilac.tcm.cidadeiluminada.Constants;
 import br.com.bilac.tcm.cidadeiluminada.R;
 
-public class SettingsActivity extends ActionBarActivity {
+public class SettingsActivity extends Activity {
 
     SettingsFragment settingsFragment;
     @Override
