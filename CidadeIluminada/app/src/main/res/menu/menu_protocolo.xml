@@ -1,32 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-<<<<<<< HEAD
     tools:context="br.com.bilac.tcm.cidadeiluminada.protocolos.ProtocoloActivity">
-    <!--<item-->
-        <!--android:id="@+id/action_novo_protocolo"-->
-        <!--android:icon="@drawable/ic_content_save_white_36dp"-->
-        <!--android:title="@string/label_action_novo_protocolo"-->
-        <!--android:showAsAction="ifRoom"-->
-    <!--/>-->
 
-=======
-    tools:context="br.com.bilac.tcm.cidadeiluminada.protocolos.activities.ProtocoloActivity">
->>>>>>> 993d8cd9976fb1fc21c453335a00ebdaf0746e52
-    <item
+
+       <item
         android:id="@+id/action_novo_protocolo"
         android:icon="@drawable/ic_send_white_36dp"
         android:title="@string/label_action_novo_protocolo"
-<<<<<<< HEAD
         android:showAsAction="ifRoom"
         />
 
 
-    <item android:id="@+id/action_settings" android:title="@string/label_action_configuracoes"
+    <item android:id="@+id/action_settings" android:title="Configurações"
         android:orderInCategory="100" android:showAsAction="never" />
-=======
-        app:showAsAction="withText|ifRoom"
-    />
-    <item android:id="@+id/action_settings" android:title="@string/label_action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
->>>>>>> 993d8cd9976fb1fc21c453335a00ebdaf0746e52
+
 </menu>

@@ -22,15 +22,6 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light">
 
-        <meta-data android:name="QUERY_LOG" android:value="true"/>
-        <meta-data android:name="DATABASE" android:value="cidadeiluminada"/>
-        <meta-data android:name="VERSION" android:value="2"/>
-        <meta-data android:name="DOMAIN_PAKAGE_NAME"
-            android:value="br.com.bilac.tcm.cidadeiluminada.models"/>
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:theme="@style/AppTheme" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />
