@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout2"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+<ImageView
+    android:id="@+id/contact_name"
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:layout_gravity="left"
+    android:padding="5dp"
+    android:background="@drawable/ic_lightbulb_black_24dp"/>
+
+<TextView
+    android:id="@+id/protocolo_id"
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="30dp"
+    android:padding="5dp"
+    android:text="54321"
+    android:layout_gravity="right"
+    android:background="@color/branca"/>
+
+
+    <TextView
+        android:id="@+id/protocolo_descricao"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        android:text="Lorem Ipsum dolor sit amet"
+        android:layout_gravity="right"
+        android:background="@color/branca"/>
+
+
+    <TextView
+        android:id="@+id/protocolo_status"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        android:text="Enviado"
+        android:layout_gravity="right"
+        android:background="@color/branca"/>
+
+</LinearLayout>

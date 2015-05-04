@@ -1,0 +1,48 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:key="preference_modo_anonimo"
+        android:disableDependentsState="true"
+        android:title="@string/pref_modo_anonimo"
+        android:defaultValue="true"
+        />
+
+    <EditTextPreference
+        android:dependency="preference_modo_anonimo"
+        android:key="preference_nome"
+        android:title="@string/pref_nome"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:selectAllOnFocus="true"
+        android:defaultValue=""
+        />
+
+    <EditTextPreference
+        android:dependency="preference_modo_anonimo"
+        android:key="preference_email"
+        android:title="@string/pref_email"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:selectAllOnFocus="true"
+        android:inputType="textEmailAddress"
+        android:defaultValue=""
+        />
+
+    <EditTextPreference
+        android:key="preference_cep"
+        android:title="@string/pref_cep"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:selectAllOnFocus="true"
+        android:defaultValue=""
+        />
+
+    <SwitchPreference
+        android:key="preference_rede_celular"
+        android:title="@string/pref_rede_celular"
+        android:summaryOn="@string/sumario_pref_rede_celular_on"
+        android:summaryOff="@string/sumario_pref_rede_celular_off"
+        android:defaultValue="true"
+        />
+
+</PreferenceScreen>
