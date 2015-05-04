@@ -1,12 +1,13 @@
 package br.com.bilac.tcm.cidadeiluminada;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class ConfigureActivity extends ActionBarActivity {
+public class ConfigureActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

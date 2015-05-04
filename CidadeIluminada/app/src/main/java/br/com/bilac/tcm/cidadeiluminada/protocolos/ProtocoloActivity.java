@@ -1,5 +1,6 @@
 package br.com.bilac.tcm.cidadeiluminada.protocolos;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Address;
@@ -41,7 +42,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.mime.TypedFile;
 
-public class ProtocoloActivity extends ActionBarActivity {
+public class ProtocoloActivity extends Activity {
 
     private Uri fileUri;
 
