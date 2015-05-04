@@ -1,6 +1,7 @@
 package br.com.bilac.tcm.cidadeiluminada.protocolos.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import br.com.bilac.tcm.cidadeiluminada.CameraUtils;
 import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
 
@@ -36,8 +38,13 @@ public class ProtocoloAdapter extends ArrayAdapter<Protocolo> {
         if (protocolo != null) {
             ImageView protocoloImagem = (ImageView) convertView.findViewById(R.id.previewItemProtocolo);
             TextView protocoloNumero = (TextView) convertView.findViewById(R.id.numeroItemProtocolo);
-            TextView protocoloDescricao = (TextView) convertView.findViewById(R.id.descricaoProtocoloLabel);
+            TextView protocoloDescricao = (TextView) convertView.findViewById(R.id.descricaoItemProtocolo);
             TextView protocoloStatus = (TextView) convertView.findViewById(R.id.statusItemProtocolo);
+
+            if (protocoloImagem != null) {
+                Bitmap bmp = CameraUtils.decodeSampledBitmapFromFile(protocolo.getArquivoProtocolo().getPath(), 32, 32);
+                protocoloImagem.setImageBitmap(bmp);
+            }
 
             if (protocoloNumero != null) {
                 protocoloNumero.setText(protocolo.getCodProtocolo());
