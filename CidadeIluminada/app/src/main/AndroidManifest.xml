@@ -30,7 +30,7 @@
 
         <meta-data
             android:name="com.google.android.gms.version"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />
@@ -82,30 +82,29 @@
 
         <activity
             android:name=".ConfigureActivity"
-            android:label="@string/title_activity_configure"
+            android:label="Configurações"
             android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/AppTheme">
-=======
+            android:theme="@style/AppTheme" />
+
+
+        <activity
             android:name=".protocolos.activities.ProtocolosListaActivity"
             android:label="@string/title_activity_protocolos_lista"
             android:parentActivityName=".activities.MainActivity" >
->>>>>>> 993d8cd9976fb1fc21c453335a00ebdaf0746e52
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
+
         <activity
             android:name=".protocolos.ProtocolosListaActivity"
             android:label="@string/title_activity_protocolos_lista"
             android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme" />
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.com.bilac.tcm.cidadeiluminada.MainActivity"
+                android:value="br.com.bilac.tcm.cidadeiluminada.activities.MainActivity"
                 android:theme="@style/AppTheme"/>
-
-
-
             <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"
@@ -117,7 +116,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.bilac.tcm.cidadeiluminada.activities.MainActivity" />
->>>>>>> 993d8cd9976fb1fc21c453335a00ebdaf0746e52
         </activity>
     </application>
 
