@@ -160,12 +160,15 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/label_button_protocolo_escolher_lugar"
+            android:text="@string/label_botao_pegar_endereco"
+            android:drawableStart="@drawable/ic_crosshairs_gps_grey600_24dp"
             android:layout_marginTop="30dp"
+            android:background="@color/branca"
             android:onClick="openPlacePicker"
             android:id="@+id/openPlacePickerButton"
             android:layout_alignParentEnd="true"
             android:layout_alignBaseline="@+id/enderecoProtocoloLabel"/>
+
 
 
 

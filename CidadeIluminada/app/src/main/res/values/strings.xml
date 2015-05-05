@@ -40,5 +40,6 @@
     <string name="pref_rede_celular">Usar dados celular</string>
     <string name="sumario_pref_rede_celular_on">Envia protocolos usando Wi-Fi e rede móvel de dados</string>
     <string name="sumario_pref_rede_celular_off">Envia protocolos somente usando rede Wi-Fi</string>
+    <string name="label_botao_pegar_endereco">Pegar endereço</string>
 
 </resources>

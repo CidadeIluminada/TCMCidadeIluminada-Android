@@ -11,6 +11,7 @@ import android.view.View;
 import br.com.bilac.tcm.cidadeiluminada.R;
 //import br.com.bilac.tcm.cidadeiluminada.activities.ConfigureActivity;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.activities.ProtocoloActivity;
+import br.com.bilac.tcm.cidadeiluminada.protocolos.activities.ProtocoloDetalheActivity;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.activities.ProtocolosListaActivity;
 
 
@@ -55,5 +56,9 @@ public class MainActivity extends Activity {
 
     public void openConfiguracoesActivity(View view) {
         startActivity(new Intent(this, SettingsActivity.class));
+    }
+
+    public void openDetalhesProtocoloActivity(View view) {
+        startActivity(new Intent(this, ProtocoloDetalheActivity.class));
     }
 }

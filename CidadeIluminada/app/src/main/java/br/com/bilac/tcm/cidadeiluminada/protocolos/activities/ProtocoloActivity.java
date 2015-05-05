@@ -223,7 +223,7 @@ public class ProtocoloActivity extends Activity {
                 setCameraButtonImage();
             } else if (resultCode == RESULT_CANCELED) {
                 ImageButton img = (ImageButton) findViewById(R.id.openCameraButton);
-                img.setImageDrawable(getResources().getDrawable(R.drawable.cameraadd128));
+                img.setImageDrawable(getResources().getDrawable(R.drawable.camera_botao));
             }
         } else if (requestCode == Constants.PLACE_PICKER_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {

@@ -6,9 +6,9 @@
 
     <ImageView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:id="@+id/previewItemProtocolo"
-        android:src="@drawable/cameraadd64"
+        android:src="@drawable/camera_botao"
         android:focusableInTouchMode="false"
         android:layout_weight="1" />
 
