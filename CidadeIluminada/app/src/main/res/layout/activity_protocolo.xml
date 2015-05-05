@@ -10,164 +10,176 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@color/branca"
-                android:id="@+id/openCameraButton"
-                android:src="@drawable/camera_botao"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:onClick="openProtocoloCamera"
-                android:contentDescription="@string/content_description_button_camera" />
 
-            <TextView
-                android:id="@+id/descricaoProtocoloLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/label_descricao_protocolo"
-                android:drawableStart="@drawable/ic_pencil_box_outline_black_24dp"
-                android:textSize="20dp"
-                android:textColor="@color/cinza"
-                android:layout_below="@+id/openGalleryButton"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="@dimen/protocoloEnderecoFieldsMargin" />
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/branca"
+            android:id="@+id/openCameraButton"
+            android:src="@drawable/camera_botao"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:onClick="openProtocoloCamera"
+            android:contentDescription="@string/content_description_button_camera" />
 
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:ems="10"
-                android:id="@+id/protocoloDescricaoEditText"
-                android:lines="2"
-                android:layout_below="@+id/descricaoProtocoloLabel"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:linksClickable="false" />
+        <TextView
+            android:id="@+id/descricaoProtocoloLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/label_descricao_protocolo"
+            android:drawableStart="@drawable/ic_pencil_box_outline_black_24dp"
+            android:textSize="20dp"
+            android:textColor="@color/cinza"
+            android:layout_below="@+id/openGalleryButton"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="@dimen/protocoloEnderecoFieldsMargin" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/protocoloDescricaoEditText"
+            android:lines="2"
+            android:layout_below="@+id/descricaoProtocoloLabel"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:linksClickable="false" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_button_protocolo_galeria"
+            android:id="@+id/openGalleryButton"
+            android:layout_below="@+id/openCameraButton"
+            android:layout_alignStart="@+id/openCameraButton"
+            android:layout_alignEnd="@+id/openCameraButton"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/label_protocolo_secao_endereco"
+            android:drawableStart="@drawable/ic_map_marker_radius_black_24dp"
+            android:textColor="@color/cinza"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:textAlignment="center"
+            android:id="@+id/enderecoProtocoloLabel"
+            android:layout_below="@+id/protocoloDescricaoEditText"
+            android:layout_alignParentStart="true" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/label_protocolo_endereco_cep"
+            android:id="@+id/cepProtocoloLabel"
+            android:layout_marginTop="25dp"
+            android:layout_below="@+id/enderecoProtocoloLabel"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true" />
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/cepEditText"
+            android:layout_alignTop="@+id/cepProtocoloLabel"
+            android:layout_alignBaseline="@+id/cepProtocoloLabel"
+            android:layout_alignStart="@+id/numeroEditText"
+            android:inputType="number"
+            android:hint="@string/hint_cep" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/label_protocolo_endereco_bairro"
+            android:id="@+id/bairroProtocoloLabel"
+            android:layout_below="@+id/cepEditText"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bairroEditText"
+            android:layout_alignTop="@+id/bairroProtocoloLabel"
+            android:layout_alignBaseline="@+id/bairroProtocoloLabel"
+            android:inputType="text"
+            android:layout_alignParentEnd="true"
+            android:layout_alignStart="@+id/numeroEditText"
+            android:hint="@string/hint_bairro" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/label_protocolo_endereco_rua"
+            android:id="@+id/ruaProtocoloLabel"
+            android:labelFor="@+id/ruaEditText"
+            android:layout_below="@+id/bairroEditText"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ruaEditText"
+            android:layout_alignTop="@+id/ruaProtocoloLabel"
+            android:inputType="text"
+            android:layout_alignBaseline="@id/ruaProtocoloLabel"
+            android:layout_alignStart="@+id/numeroEditText"
+            android:layout_alignParentEnd="true"
+            android:hint="@string/hint_rua" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/label_protocolo_endereco_numero"
+            android:id="@+id/numeroProtocoloLabel"
+            android:layout_below="@+id/ruaEditText"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/numeroEditText"
+            android:layout_alignTop="@+id/numeroProtocoloLabel"
+            android:layout_toEndOf="@id/numeroProtocoloLabel"
+            android:layout_alignBaseline="@+id/numeroProtocoloLabel"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/protocoloEnderecoFieldsMargin"
+            android:hint="@string/hint_numero"
+            android:inputType="number" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_botao_pegar_endereco"
+            android:drawableStart="@drawable/ic_crosshairs_gps_grey600_24dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/branca"
+            android:onClick="openPlacePicker"
+            android:id="@+id/openPlacePickerButton"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBaseline="@+id/enderecoProtocoloLabel"/>
+
+
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/label_button_protocolo_galeria"
-                android:id="@+id/openGalleryButton"
-                android:layout_below="@+id/openCameraButton"
-                android:layout_alignStart="@+id/openCameraButton"
-                android:layout_alignEnd="@+id/openCameraButton"
-                android:layout_centerHorizontal="true"
-                android:visibility="gone" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/label_protocolo_secao_endereco"
-                android:drawableStart="@drawable/ic_map_marker_radius_black_24dp"
-                android:textColor="@color/cinza"
-                android:textSize="20dp"
-                android:layout_marginTop="20dp"
-                android:textAlignment="center"
-                android:id="@+id/enderecoProtocoloLabel"
-                android:layout_below="@+id/protocoloDescricaoEditText"
-                android:layout_alignParentStart="true" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/label_protocolo_endereco_cep"
-                android:id="@+id/cepProtocoloLabel"
-                android:layout_marginTop="25dp"
-                android:layout_below="@+id/enderecoProtocoloLabel"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true" />
-
-            <EditText
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:id="@+id/cepEditText"
-                android:layout_alignTop="@+id/cepProtocoloLabel"
-                android:layout_alignBaseline="@+id/cepProtocoloLabel"
-                android:layout_alignStart="@+id/numeroEditText"
-                android:inputType="number"
-                android:hint="@string/hint_cep" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/label_protocolo_endereco_bairro"
-                android:id="@+id/bairroProtocoloLabel"
-                android:layout_below="@+id/cepEditText"
-                android:layout_alignParentStart="true" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/bairroEditText"
-                android:layout_alignTop="@+id/bairroProtocoloLabel"
-                android:layout_alignBaseline="@+id/bairroProtocoloLabel"
-                android:inputType="text"
-                android:layout_alignParentEnd="true"
-                android:layout_alignStart="@+id/numeroEditText"
-                android:hint="@string/hint_bairro" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/label_protocolo_endereco_rua"
-                android:id="@+id/ruaProtocoloLabel"
-                android:labelFor="@+id/ruaEditText"
-                android:layout_below="@+id/bairroEditText"
-                android:layout_alignParentStart="true" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/ruaEditText"
-                android:layout_alignTop="@+id/ruaProtocoloLabel"
-                android:inputType="text"
-                android:layout_alignBaseline="@id/ruaProtocoloLabel"
-                android:layout_alignStart="@+id/numeroEditText"
-                android:layout_alignParentEnd="true"
-                android:hint="@string/hint_rua" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/label_protocolo_endereco_numero"
-                android:id="@+id/numeroProtocoloLabel"
-                android:layout_below="@+id/ruaEditText"
-                android:layout_alignParentStart="true" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/numeroEditText"
-                android:layout_alignTop="@+id/numeroProtocoloLabel"
-                android:layout_toEndOf="@id/numeroProtocoloLabel"
-                android:layout_alignBaseline="@+id/numeroProtocoloLabel"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="@dimen/protocoloEnderecoFieldsMargin"
-                android:hint="@string/hint_numero"
-                android:inputType="number" />
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_button_protocolo_escolher_lugar"
-                android:layout_marginTop="30dp"
-                android:onClick="openPlacePicker"
-                android:id="@+id/openPlacePickerButton"
-                android:layout_alignParentEnd="true"
-                android:layout_alignBaseline="@+id/enderecoProtocoloLabel"/>
+                android:text="Detalhes"
+                android:onClick="openDetalhesProtocoloActivity"
+                />
 
 
         </RelativeLayout>

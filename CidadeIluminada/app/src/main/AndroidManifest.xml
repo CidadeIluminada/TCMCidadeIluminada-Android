@@ -87,6 +87,15 @@
                 android:value=".activities.MainActivity" />
         </activity>
 
+
+        <activity android:name=".protocolos.activities.ProtocoloDetalheActivity"
+            android:label="Detalhes Denuncia"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                 android:value=".activities.MainActivity"  />
+        </activity>
+
         <activity
             android:name=".protocolos.ProtocolosListaActivity"
             android:label="@string/title_activity_protocolos_lista"
