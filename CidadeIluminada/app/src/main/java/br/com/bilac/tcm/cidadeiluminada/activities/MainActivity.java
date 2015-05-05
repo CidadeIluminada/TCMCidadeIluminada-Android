@@ -58,7 +58,4 @@ public class MainActivity extends Activity {
         startActivity(new Intent(this, SettingsActivity.class));
     }
 
-    public void openDetalhesProtocoloActivity(View view) {
-        startActivity(new Intent(this, ProtocoloDetalheActivity.class));
-    }
 }

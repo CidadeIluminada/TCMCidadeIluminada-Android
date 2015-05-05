@@ -173,5 +173,14 @@
             android:layout_alignBaseline="@+id/enderecoProtocoloLabel"/>
 
 
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Detalhes"
+                android:onClick="openDetalhesProtocoloActivity"
+                />
+
+
         </RelativeLayout>
 </ScrollView>

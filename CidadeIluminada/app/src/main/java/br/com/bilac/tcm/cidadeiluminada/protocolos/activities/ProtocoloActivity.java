@@ -226,7 +226,7 @@ public class ProtocoloActivity extends Activity {
                 setCameraButtonImage();
             } else if (resultCode == RESULT_CANCELED) {
                 ImageButton img = (ImageButton) findViewById(R.id.openCameraButton);
-                img.setImageDrawable(getResources().getDrawable(R.drawable.camera_botao));
+                img.setImageDrawable(getResources().getDrawable(R.drawable.foto_exemplo_cidade));
             }
         } else if (requestCode == Constants.PLACE_PICKER_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
@@ -247,5 +247,9 @@ public class ProtocoloActivity extends Activity {
         ImageButton img = (ImageButton) findViewById(R.id.openCameraButton);
         Bitmap bmp = CameraUtils.decodeSampledBitmapFromFile(fileUri.getPath(), 128, 128);
         img.setImageBitmap(bmp);
+    }
+
+    public void openDetalhesProtocoloActivity(View view) {
+        startActivity(new Intent(this, ProtocoloDetalheActivity.class));
     }
 }
