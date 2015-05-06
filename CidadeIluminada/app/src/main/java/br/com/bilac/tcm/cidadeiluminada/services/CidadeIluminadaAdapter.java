@@ -9,7 +9,7 @@ import retrofit.RestAdapter;
 public class CidadeIluminadaAdapter {
     public static CidadeIluminadaService getCidadeIluminadaService() {
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(Constants.CIDADEILUMINADA_HOST_DEBUG)
+                .setEndpoint(Constants.CIDADEILUMINADA_HOST)
                 .build();
         return restAdapter.create(CidadeIluminadaService.class);
     }
