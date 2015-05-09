@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -33,6 +32,7 @@ import java.util.Locale;
 import br.com.bilac.tcm.cidadeiluminada.CameraUtils;
 import br.com.bilac.tcm.cidadeiluminada.Constants;
 import br.com.bilac.tcm.cidadeiluminada.R;
+import br.com.bilac.tcm.cidadeiluminada.activities.SettingsActivity;
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.validators.EmptyValidator;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.validators.ValidationState;
@@ -143,6 +143,7 @@ public class ProtocoloActivity extends Activity {
     }
 
     public void openConfiguracoesActivity(MenuItem item) {
+        startActivity(new Intent(this, SettingsActivity.class));
     }
 
     private class CidadeIluminadaCallback implements Callback<CidadeIluminadaApiResponse> {
