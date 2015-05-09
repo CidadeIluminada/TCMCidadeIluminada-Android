@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 

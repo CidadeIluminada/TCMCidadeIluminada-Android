@@ -16,6 +16,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/android:empty"
-        android:text="Protocolos que você fez irão ser listados aqui. Para iniciar, selecione Fazer Denúncia no menu principal"/>
+        android:text="@string/lista_protocolos_vazia"/>
 
 </LinearLayout>

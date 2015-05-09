@@ -90,7 +90,7 @@
 
 
         <activity android:name=".protocolos.activities.ProtocoloDetalheActivity"
-            android:label="Detalhes Denuncia"
+            android:label="@string/title_activity_protocolo_detalhe"
             android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme">
             <meta-data
@@ -98,12 +98,7 @@
                  android:value=".activities.MainActivity"  />
         </activity>
 
-        <activity
-            android:name=".protocolos.ProtocolosListaActivity"
-            android:label="@string/title_activity_protocolos_lista"
-            android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/AppTheme" />
-            <meta-data
+        <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.bilac.tcm.cidadeiluminada.activities.MainActivity"
                 android:theme="@style/AppTheme"/>
