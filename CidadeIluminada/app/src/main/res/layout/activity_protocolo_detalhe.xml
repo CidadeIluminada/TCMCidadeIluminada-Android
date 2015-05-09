@@ -28,7 +28,8 @@
             android:text="@string/label_situacao_protocolo"
             android:id="@+id/statusProtocoloLabel"
             android:layout_below="@+id/openCameraButton"
-            android:layout_marginTop="25dp" />
+            android:layout_marginTop="25dp"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,8 +38,30 @@
             android:text=""
             android:id="@+id/statusProtocoloText"
             android:layout_toEndOf="@+id/statusProtocoloLabel"
-            android:singleLine="false"
+            android:singleLine="true"
             android:layout_alignBaseline="@+id/statusProtocoloLabel"
+            android:layout_alignParentEnd="true"
+            android:layout_alignStart="@+id/dataProtocoloText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/label_data_protocolo"
+            android:id="@+id/dataProtocoloLabel"
+            android:layout_below="@+id/statusProtocoloLabel"
+            android:layout_marginTop="25dp"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=""
+            android:id="@+id/dataProtocoloText"
+            android:layout_toEndOf="@+id/dataProtocoloLabel"
+            android:singleLine="true"
+            android:layout_alignBaseline="@+id/dataProtocoloLabel"
             android:layout_marginLeft="10dp"
             android:layout_alignParentEnd="true" />
 
@@ -49,7 +72,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/label_descricao_protocolo"
             android:layout_marginTop="25dp"
-            android:layout_below="@+id/statusProtocoloLabel"
+            android:layout_below="@+id/dataProtocoloLabel"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="5dp" />
 
@@ -57,7 +80,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="Lorem Ipsum Dolor Sit Amet"
 
             android:id="@+id/descricaoProtocoloText"
             android:layout_below="@+id/descricaoProtocoloLabel"
@@ -97,7 +119,8 @@
             android:layout_alignTop="@+id/cepProtocoloLabel"
             android:layout_alignBaseline="@+id/cepProtocoloLabel"
             android:layout_alignStart="@+id/numeroText"
-            android:layout_marginBottom="@dimen/protocoloEnderecoFieldsMargin" />
+            android:layout_marginBottom="@dimen/protocoloEnderecoFieldsMargin"
+            android:layout_alignParentEnd="true" />
 
         <TextView
             android:layout_width="wrap_content"
