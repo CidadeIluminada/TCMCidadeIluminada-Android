@@ -45,4 +45,5 @@
     <string name="label_botao_pegar_endereco">Pegar endereço</string>
     <string name="lista_protocolos_vazia">Protocolos que você fez irão ser listados aqui. Para iniciar, selecione Fazer Denúncia no menu principal</string>
     <string name="content_description_foto_protocolo">Foto protocolo</string>
+    <string name="label_situacao_protocolo">Situação:</string>
 </resources>

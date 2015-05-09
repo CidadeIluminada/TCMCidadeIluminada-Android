@@ -9,11 +9,10 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <ImageButton
+        <ImageView
             android:id="@+id/openCameraButton"
             android:layout_width="200dp"
             android:layout_height="100dp"
-            android:background="@color/branca"
             android:src="@drawable/foto_exemplo_cidade"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
@@ -23,13 +22,34 @@
             />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/label_situacao_protocolo"
+            android:id="@+id/statusProtocoloLabel"
+            android:layout_below="@+id/openCameraButton"
+            android:layout_marginTop="25dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=""
+            android:id="@+id/statusProtocoloText"
+            android:layout_toEndOf="@+id/statusProtocoloLabel"
+            android:singleLine="false"
+            android:layout_alignBaseline="@+id/statusProtocoloLabel"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
             android:id="@+id/descricaoProtocoloLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/label_descricao_protocolo"
             android:layout_marginTop="25dp"
-            android:layout_below="@+id/openCameraButton"
+            android:layout_below="@+id/statusProtocoloLabel"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="5dp" />
 
@@ -141,5 +161,6 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="@dimen/protocoloEnderecoFieldsMargin"
             android:layout_marginBottom="@dimen/protocoloEnderecoFieldsMargin" />
+
     </RelativeLayout>
 </ScrollView>
