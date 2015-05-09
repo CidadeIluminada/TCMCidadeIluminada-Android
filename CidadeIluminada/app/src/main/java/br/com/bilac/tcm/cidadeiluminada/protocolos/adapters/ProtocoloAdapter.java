@@ -42,8 +42,8 @@ public class ProtocoloAdapter extends ArrayAdapter<Protocolo> {
             TextView protocoloStatus = (TextView) convertView.findViewById(R.id.statusItemProtocolo);
 
             if (protocoloImagem != null) {
-                Bitmap bmp = CameraUtils.decodeSampledBitmapFromFile(protocolo.getArquivoProtocolo().getPath(), 32, 32);
-                protocoloImagem.setImageBitmap(bmp);
+                /*Bitmap bmp = CameraUtils.decodeSampledBitmapFromFile(protocolo.getArquivoProtocolo().getPath(), 32, 32);
+                protocoloImagem.setImageBitmap(bmp);*/
             }
 
             if (protocoloNumero != null) {
