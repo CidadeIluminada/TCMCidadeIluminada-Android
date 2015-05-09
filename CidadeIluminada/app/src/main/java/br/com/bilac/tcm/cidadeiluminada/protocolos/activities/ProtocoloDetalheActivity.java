@@ -34,12 +34,15 @@ public class ProtocoloDetalheActivity extends Activity{
 
     private void preencherDadosProtocolo(long protocoloId) {
         Protocolo protocolo = Protocolo.findById(Protocolo.class, protocoloId);
+
+        TextView codigo = (TextView) findViewById(R.id.codProtocoloText);
         TextView descricao = (TextView) findViewById(R.id.descricaoProtocoloText);
         TextView cep = (TextView) findViewById(R.id.cepText);
         TextView bairro = (TextView) findViewById(R.id.bairroText);
         TextView rua = (TextView) findViewById(R.id.ruaText);
         TextView numero = (TextView) findViewById(R.id.numeroText);
 
+        codigo.setText(protocolo.getCodProtocolo());
         descricao.setText(protocolo.getDescricao());
         cep.setText(protocolo.getCep());
         bairro.setText(protocolo.getBairro());
