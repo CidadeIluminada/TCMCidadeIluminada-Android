@@ -20,4 +20,6 @@ public final class Constants {
     public static final String EMAIL_PREFERENCE_KEY = "preference_email";
     public static final String ANONIMO_PREFERENCE_KEY = "preference_modo_anonimo";
     public static final String REDE_CELULAR_PREFERENCE_KEY = "preference_rede_celular";
+
+    public static final String PROTOCOLO_ID_KEY = PACKAGE + ".PROTOCOLO_ID";
 }

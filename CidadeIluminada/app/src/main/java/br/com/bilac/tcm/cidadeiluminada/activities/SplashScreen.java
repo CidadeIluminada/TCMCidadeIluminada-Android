@@ -1,5 +1,5 @@
-package br.com.bilac.tcm.cidadeiluminada;
-import br.com.bilac.tcm.cidadeiluminada.activities.MainActivity;
+package br.com.bilac.tcm.cidadeiluminada.activities;
+import br.com.bilac.tcm.cidadeiluminada.R;
 
 import android.app.Activity;
 import android.content.Intent;

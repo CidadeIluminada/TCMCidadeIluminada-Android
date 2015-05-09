@@ -1,16 +1,20 @@
 package br.com.bilac.tcm.cidadeiluminada.protocolos.activities;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
+import br.com.bilac.tcm.cidadeiluminada.Constants;
 import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.adapters.ProtocoloAdapter;
@@ -52,6 +56,16 @@ public class ProtocolosListaActivity extends ListActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_protocolos_lista, menu);
         return true;
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        Protocolo protocolo = protocolos.get(position);
+        Intent startShowProtocolo = new Intent(getApplicationContext(),
+                ProtocoloDetalheActivity.class);
+        startShowProtocolo.putExtra(Constants.PROTOCOLO_ID_KEY, protocolo.getId());
+        startActivity(startShowProtocolo);
     }
 
     @Override

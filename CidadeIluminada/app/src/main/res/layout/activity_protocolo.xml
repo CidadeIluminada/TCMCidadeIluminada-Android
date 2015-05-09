@@ -88,7 +88,7 @@
             android:layout_alignParentEnd="true" />
 
         <EditText
-            android:layout_width="100dp"
+            android:layout_width="115dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:id="@+id/cepEditText"
@@ -96,8 +96,7 @@
             android:layout_alignBaseline="@+id/cepProtocoloLabel"
             android:layout_alignStart="@+id/numeroEditText"
             android:inputType="number"
-            android:hint="@string/hint_cep"
-            android:layout_toStartOf="@+id/openPlacePickerButton" />
+            android:hint="@string/hint_cep" />
 
         <TextView
             android:layout_width="wrap_content"
