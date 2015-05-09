@@ -41,7 +41,8 @@
         android:textColor="#ffffff"
         android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"
-        android:text="@string/site" />
+        android:text="@string/site"
+        android:id="@+id/textView" />
 
 
     <ImageView
@@ -49,11 +50,10 @@
         android:layout_width="90dip"
         android:layout_height="90dip"
         android:src="@drawable/bilac9"
-        android:layout_alignParentEnd="true"
         android:layout_marginRight="10dp"
-        android:layout_alignParentBottom="true"
 
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
 
     <ImageView
@@ -61,9 +61,9 @@
         android:layout_width="110dip"
         android:layout_height="110dip"
         android:src="@drawable/logopmsjc9"
-        android:layout_alignParentBottom="true"
         android:layout_marginRight="20dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
 
 
