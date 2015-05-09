@@ -4,5 +4,4 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="mainMenuButtonMargin">0dp</dimen>
     <dimen name="protocoloEnderecoFieldsMargin">10dp</dimen>
-    <dimen name="altura_linha">30dp</dimen>
 </resources>

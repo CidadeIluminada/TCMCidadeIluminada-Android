@@ -67,7 +67,6 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/label_protocolo_secao_endereco"
             android:drawableStart="@drawable/ic_map_marker_radius_black_24dp"
-            android:textColor="@color/cinza"
             android:textSize="20dp"
             android:layout_marginTop="20dp"
             android:textAlignment="center"
@@ -85,7 +84,7 @@
             android:layout_marginTop="25dp"
             android:layout_below="@+id/enderecoProtocoloLabel"
             android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="false" />
 
         <EditText
             android:layout_width="115dp"
