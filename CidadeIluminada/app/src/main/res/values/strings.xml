@@ -48,6 +48,6 @@
     <string name="label_situacao_protocolo">Situação:</string>
     <string name="label_data_protocolo">Criado em:</string>
     <string name="logo_cidade_iluminada_description">Logo Cidade Iluminada</string>
-    <string name="label_cod_protocolo">Código</string>
+    <string name="label_cod_protocolo">Código:</string>
     <string name="label_action_atualizar_protocolo">Atualizar Protocolo</string>
 </resources>

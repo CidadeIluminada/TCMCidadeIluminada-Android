@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import br.com.bilac.tcm.cidadeiluminada.CameraUtils;
 import br.com.bilac.tcm.cidadeiluminada.Constants;
 import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.activities.SettingsActivity;
@@ -35,14 +37,24 @@ public class ProtocoloDetalheActivity extends Activity{
     private void preencherDadosProtocolo(long protocoloId) {
         Protocolo protocolo = Protocolo.findById(Protocolo.class, protocoloId);
 
+        ImageView fotoProtocolo = (ImageView) findViewById(R.id.fotoProtocoloView);
+
         TextView codigo = (TextView) findViewById(R.id.codProtocoloText);
+        TextView situacao = (TextView) findViewById(R.id.statusProtocoloText);
+        TextView criado = (TextView) findViewById(R.id.dataProtocoloText);
         TextView descricao = (TextView) findViewById(R.id.descricaoProtocoloText);
         TextView cep = (TextView) findViewById(R.id.cepText);
         TextView bairro = (TextView) findViewById(R.id.bairroText);
         TextView rua = (TextView) findViewById(R.id.ruaText);
         TextView numero = (TextView) findViewById(R.id.numeroText);
 
+        fotoProtocolo.setImageBitmap(
+                CameraUtils.decodeSampledBitmapFromFile(protocolo.getArquivoProtocolo().getPath(),
+                        fotoProtocolo.getLayoutParams().width, fotoProtocolo.getLayoutParams().height));
+
         codigo.setText(protocolo.getCodProtocolo());
+        situacao.setText(protocolo.getStatus(true));
+        criado.setText(protocolo.getTimestamp());
         descricao.setText(protocolo.getDescricao());
         cep.setText(protocolo.getCep());
         bairro.setText(protocolo.getBairro());

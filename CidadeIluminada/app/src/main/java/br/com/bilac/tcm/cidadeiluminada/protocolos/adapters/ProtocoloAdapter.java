@@ -84,7 +84,7 @@ public class ProtocoloAdapter extends ArrayAdapter<Protocolo> {
                 protocoloDescricao.setText(protocolo.getDescricao());
             }
             if (protocoloStatus != null) {
-                protocoloStatus.setText("Status");
+                protocoloStatus.setText(protocolo.getStatus(true));
             }
         }
 

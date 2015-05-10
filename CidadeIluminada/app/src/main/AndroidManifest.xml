@@ -30,7 +30,7 @@
             android:value="cidadeiluminada" />
         <meta-data
             android:name="VERSION"
-            android:value="4"/>
+            android:value="5"/>
         <meta-data
             android:name="DOMAIN_PAKAGE_NAME"
             android:value="br.com.bilac.tcm.cidadeiluminada.models" />

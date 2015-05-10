@@ -7,6 +7,7 @@ import com.orm.SugarRecord;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 /**
@@ -27,16 +28,23 @@ public class Protocolo extends SugarRecord {
     private String email;
 
     private String _timestamp;
+    private String status;
 
 
     public Protocolo() {
     }
+
+    public static final String NAO_ENVIADO = "nao_enviado";
+    public static final String NOVO = "NOVO";
+    public static final String INVALIDO = "INVALIDO";
+    public static final String PROCESSADO = "PROCESSADO";
 
     public Protocolo(String cep, String estado, String cidade, String bairro, String logradouro,
                      String numero, String descricao, String nome, String email,
                      String arquivo_protocolo) {
         this.cod_protocolo = UUID.randomUUID().toString();
         this._timestamp = new DateTime(DateTimeZone.UTC).toString();
+        this.status = NAO_ENVIADO;
 
         this.cep = cep;
         this.estado = estado;
@@ -107,5 +115,26 @@ public class Protocolo extends SugarRecord {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getTimestamp() {
+        return _timestamp;
+    }
+
+    public String getStatus() {
+        return getStatus(false);
+    }
+    public String getStatus(boolean pretty) {
+        if (pretty) {
+            HashMap<String, String> prettyStatusMap = new HashMap<>();
+            prettyStatusMap.put(NAO_ENVIADO, "Não Enviado");
+            prettyStatusMap.put(NOVO, "Novo");
+            prettyStatusMap.put(INVALIDO, "Inválido");
+            prettyStatusMap.put(PROCESSADO, "Processado");
+            return prettyStatusMap.get(this.status);
+        }
+        else {
+            return this.status;
+        }
     }
 }
