@@ -70,4 +70,10 @@ public class ProtocoloDetalheActivity extends Activity{
     public void openConfiguracoesActivity(MenuItem item) {
         startActivity(new Intent(this, SettingsActivity.class));
     }
+
+    public void enviarProtocolo(MenuItem item) {
+    }
+
+    public void atualizarProtocolo(MenuItem item) {
+    }
 }

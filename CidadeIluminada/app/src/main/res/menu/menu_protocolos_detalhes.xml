@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/action_novo_protocolo"
+        android:icon="@drawable/ic_send_white_36dp"
+        android:title="@string/label_action_novo_protocolo"
+        android:showAsAction="always|withText"
+        />
+    <item
+        android:id="@+id/action_atualizar_protocolo"
+        android:onClick="atualizarProtocolo"
+        android:icon="@drawable/ic_refresh_white_36dp"
+        android:title="@string/label_action_atualizar_protocolo"
+        android:showAsAction="always|withText"
+        />
+
+    <item
         android:id="@+id/action_settings"
         android:onClick="openConfiguracoesActivity"
         android:title="@string/label_action_settings"
