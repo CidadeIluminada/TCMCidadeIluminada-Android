@@ -39,11 +39,11 @@ public class ProtocoloDetalheActivity extends Activity{
             finish();
         }
 
-        protocolo = preencherDadosProtocolo(protocoloId);
+        protocolo = Protocolo.findById(Protocolo.class, protocoloId);
+        preencherDadosProtocolo(protocolo);
     }
 
-    private Protocolo preencherDadosProtocolo(long protocoloId) {
-        Protocolo protocolo = Protocolo.findById(Protocolo.class, protocoloId);
+    public void preencherDadosProtocolo(Protocolo protocolo) {
 
         ImageView fotoProtocolo = (ImageView) findViewById(R.id.fotoProtocoloView);
 
@@ -68,8 +68,6 @@ public class ProtocoloDetalheActivity extends Activity{
         bairro.setText(protocolo.getBairro());
         rua.setText(protocolo.getLogradouro());
         numero.setText(protocolo.getNumero());
-
-        return protocolo;
     }
 
     @Override
@@ -109,6 +107,6 @@ public class ProtocoloDetalheActivity extends Activity{
     }
 
     public void atualizarProtocolo(MenuItem item) {
-        CidadeIluminada.atualizarProtocolo(protocolo, getApplicationContext());
+        CidadeIluminada.atualizarProtocolo(protocolo, this);
     }
 }

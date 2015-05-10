@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
+import br.com.bilac.tcm.cidadeiluminada.protocolos.activities.ProtocoloDetalheActivity;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.models.CidadeIluminadaApiResponse;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.models.CidadeIluminadaProtocoloApiResponse;
 import retrofit.Callback;
@@ -31,6 +32,11 @@ public class CidadeIluminadaProtocoloCallback implements Callback<CidadeIluminad
         protocolo.setStatus(payload.getStatus());
         // Atualizar o resto quando precisar?
         protocolo.save();
+        try {
+            ProtocoloDetalheActivity detalheActivity = (ProtocoloDetalheActivity) context;
+            detalheActivity.preencherDadosProtocolo(protocolo);
+        } catch (ClassCastException ignored) {
+        }
         Toast.makeText(context, context.getString(R.string.protocolo_atualiza_success), Toast.LENGTH_SHORT).show();
     }
 
