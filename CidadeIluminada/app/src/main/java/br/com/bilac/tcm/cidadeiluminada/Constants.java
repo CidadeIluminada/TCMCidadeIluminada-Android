@@ -4,6 +4,8 @@ package br.com.bilac.tcm.cidadeiluminada;
  * Created by arthur on 22/03/15.
  */
 public final class Constants {
+    public static final int NO_ID = -1;
+
     public static final int CAMERA_REQUEST_CODE = 1;
     public static final int PLACE_PICKER_REQUEST_CODE = 2;
     public static final int NOVO_PROTOCOLO_REQUEST_CODE = 3;

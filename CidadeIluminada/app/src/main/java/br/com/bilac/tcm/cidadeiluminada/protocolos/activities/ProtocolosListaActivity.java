@@ -1,5 +1,6 @@
 package br.com.bilac.tcm.cidadeiluminada.protocolos.activities;
 
+import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-
-import com.orm.StringUtil;
-import com.orm.query.Select;
 
 import java.util.ArrayList;
 
@@ -33,7 +31,9 @@ public class ProtocolosListaActivity extends ListActivity {
         }
     };
 
+    //TODO: Consertar o provável leak.
     private Handler protocoloListHandler = new Handler() {
+
         @Override
         public void handleMessage(Message msg) {
             //TODO: Descomentar linha abaixo quando o Sugar lançar a função listAll com order_by
@@ -49,6 +49,12 @@ public class ProtocolosListaActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent protocoloIdIntent = getIntent();
+        long protocoloId = protocoloIdIntent.getLongExtra(Constants.PROTOCOLO_ID_KEY, Constants.NO_ID);
+        if (protocoloId != Constants.NO_ID) {
+            startProtocolosDetalhes(protocoloId);
+        }
+
         setContentView(R.layout.activity_protocolos_lista);
         protocoloAdapter = new ProtocoloAdapter(this, R.layout.protocolo_item_view,
                 new ArrayList<Protocolo>());
@@ -56,6 +62,13 @@ public class ProtocolosListaActivity extends ListActivity {
         new Thread(null, protocolosListRunnable, "FillProtocolosThread").start();
     }
 
+
+    private void startProtocolosDetalhes(long protocoloId) {
+        Intent startShowProtocolo = new Intent(getApplicationContext(),
+                ProtocoloDetalheActivity.class);
+        startShowProtocolo.putExtra(Constants.PROTOCOLO_ID_KEY, protocoloId);
+        startActivity(startShowProtocolo);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,11 +79,7 @@ public class ProtocolosListaActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        Protocolo protocolo = protocolos.get(position);
-        Intent startShowProtocolo = new Intent(getApplicationContext(),
-                ProtocoloDetalheActivity.class);
-        startShowProtocolo.putExtra(Constants.PROTOCOLO_ID_KEY, protocolo.getId());
-        startActivity(startShowProtocolo);
+        startProtocolosDetalhes(protocolos.get(position).getId());
     }
 
     @Override

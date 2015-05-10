@@ -33,9 +33,9 @@ public class ProtocoloDetalheActivity extends Activity{
         setContentView(R.layout.activity_protocolo_detalhe);
 
         Intent startupIntent = getIntent();
-        long protocoloId = startupIntent.getLongExtra(Constants.PROTOCOLO_ID_KEY, -1);
+        long protocoloId = startupIntent.getLongExtra(Constants.PROTOCOLO_ID_KEY, Constants.NO_ID);
 
-        if (protocoloId == -1) {
+        if (protocoloId == Constants.NO_ID) {
             finish();
         }
 

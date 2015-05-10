@@ -49,8 +49,8 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.NOVO_PROTOCOLO_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                long protocoloId = data.getLongExtra(Constants.PROTOCOLO_ID_KEY, -1);
-                if (protocoloId == -1) {
+                long protocoloId = data.getLongExtra(Constants.PROTOCOLO_ID_KEY, Constants.NO_ID);
+                if (protocoloId == Constants.NO_ID) {
                     return;
                 }
                 Intent listaIntent = new Intent(this, ProtocolosListaActivity.class);
