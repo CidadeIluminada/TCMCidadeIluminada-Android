@@ -1,5 +1,7 @@
 package br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.models;
 
+import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
+
 /**
  * Created by arthur on 04/04/15.
  */
@@ -44,26 +46,6 @@ public class CidadeIluminadaApiResponse {
     }
 
     private Errors errors;
-
-    public static class Protocolo {
-        private String cod_protocolo;
-        private String status;
-
-        public Protocolo() {
-        }
-
-        @Override
-        public String toString() {
-            return "Protocolo{" +
-                    "cod_protocolo='" + cod_protocolo + '\'' +
-                    ", status='" + status + '\'' +
-                    '}';
-        }
-
-        public String getStatus() {
-            return status;
-        }
-    }
 
     private Protocolo protocolo;
 
