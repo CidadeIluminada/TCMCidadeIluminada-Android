@@ -19,6 +19,8 @@ import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
  */
 public class ProtocoloDetalheActivity extends Activity{
 
+    private Protocolo protocolo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,10 +33,10 @@ public class ProtocoloDetalheActivity extends Activity{
             finish();
         }
 
-        preencherDadosProtocolo(protocoloId);
+        protocolo = preencherDadosProtocolo(protocoloId);
     }
 
-    private void preencherDadosProtocolo(long protocoloId) {
+    private Protocolo preencherDadosProtocolo(long protocoloId) {
         Protocolo protocolo = Protocolo.findById(Protocolo.class, protocoloId);
 
         ImageView fotoProtocolo = (ImageView) findViewById(R.id.fotoProtocoloView);
@@ -60,11 +62,24 @@ public class ProtocoloDetalheActivity extends Activity{
         bairro.setText(protocolo.getBairro());
         rua.setText(protocolo.getLogradouro());
         numero.setText(protocolo.getNumero());
+
+        return protocolo;
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_protocolos_detalhes, menu);
+
+        String protocoloStatus = protocolo.getStatus();
+        MenuItem item;
+        if (protocoloStatus.equals(Protocolo.NAO_ENVIADO)) {
+            item = menu.findItem(R.id.action_atualizar_protocolo);
+        } else {
+            item = menu.findItem(R.id.action_novo_protocolo);
+        }
+        item.setVisible(false);
+        this.invalidateOptionsMenu();
+
         return true;
     }
 
