@@ -1,10 +1,13 @@
 package br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada;
 
-import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.utils.CidadeIluminadaApiResponse;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.models.CidadeIluminadaApiResponse;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.models.CidadeIluminadaProtocoloApiResponse;
 import retrofit.Callback;
+import retrofit.http.GET;
 import retrofit.http.Multipart;
 import retrofit.http.POST;
 import retrofit.http.Part;
+import retrofit.http.Query;
 import retrofit.mime.TypedFile;
 
 /**
@@ -38,4 +41,8 @@ public interface CidadeIluminadaService {
                                    @Part("email") String email,
                                    @Part("arquivo_protocolo") TypedFile arquivo_protocolo,
                                    Callback<CidadeIluminadaApiResponse> callback);
+
+    @GET("/protocolos/protocolo.json")
+    void atualizarProtocolo(@Query("cod_protocolo") String codProtocolo,
+                            Callback<CidadeIluminadaProtocoloApiResponse> callback);
 }

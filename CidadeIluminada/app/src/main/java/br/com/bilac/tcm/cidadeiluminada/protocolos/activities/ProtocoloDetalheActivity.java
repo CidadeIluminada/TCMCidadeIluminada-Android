@@ -109,5 +109,6 @@ public class ProtocoloDetalheActivity extends Activity{
     }
 
     public void atualizarProtocolo(MenuItem item) {
+        CidadeIluminada.atualizarProtocolo(protocolo, getApplicationContext());
     }
 }

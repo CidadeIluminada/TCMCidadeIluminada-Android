@@ -3,7 +3,6 @@ package br.com.bilac.tcm.cidadeiluminada.services;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.emil.android.util.Connectivity;
@@ -15,49 +14,15 @@ import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.CidadeIluminadaAdapter;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.CidadeIluminadaService;
-import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.utils.CidadeIluminadaApiResponse;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.callbacks.CidadeIluminadaApiCallback;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.callbacks.CidadeIluminadaProtocoloCallback;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.models.CidadeIluminadaProtocoloApiResponse;
 import retrofit.mime.TypedFile;
 
 /**
  * Created by arthur on 10/05/15.
  */
 public class CidadeIluminada {
-
-    private static class CidadeIluminadaCallback implements Callback<CidadeIluminadaApiResponse> {
-
-        private Context context;
-        private Protocolo protocolo;
-
-        public CidadeIluminadaCallback(Protocolo protocolo, Context context) {
-            this.context = context;
-            this.protocolo = protocolo;
-        }
-
-        @Override
-        public void success(CidadeIluminadaApiResponse cidadeIluminadaApiResponse,
-                            Response response) {
-            Log.d("sucess", cidadeIluminadaApiResponse.toString() + " " +
-                    response.toString());
-            Toast.makeText(context, R.string.protocolo_envio_sucesso, Toast.LENGTH_SHORT).show();
-            protocolo.setStatus(cidadeIluminadaApiResponse.getProtocolo().getStatus());
-        }
-        @Override
-        public void failure(RetrofitError retrofitError) {
-            Toast.makeText(context, R.string.protocolo_envio_erro, Toast.LENGTH_LONG).show();
-            Log.e("error", retrofitError.toString());
-            try {
-                CidadeIluminadaApiResponse response = (CidadeIluminadaApiResponse) retrofitError.getBody();
-                Log.e("fail", response.toString());
-            } catch (ClassCastException exception) {
-                Log.w("failCC", exception.getMessage());
-            }
-        }
-
-
-    }
 
     public static void enviarNovoProtocolo(Protocolo protocolo, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -83,7 +48,7 @@ public class CidadeIluminada {
         String nome = protocolo.getNome();
         String email = protocolo.getEmail();
 
-        CidadeIluminadaCallback callback = new CidadeIluminadaCallback(protocolo, context);
+        CidadeIluminadaApiCallback callback = new CidadeIluminadaApiCallback(protocolo, context);
 
         if (preferences.getBoolean(Constants.ANONIMO_PREFERENCE_KEY, true)) {
             service.novoProtocolo(codProtocolo, cep, logradouro, cidade, bairro, numero, estado,
@@ -92,5 +57,12 @@ public class CidadeIluminada {
             service.novoProtocoloIdentificado(codProtocolo, cep, logradouro, cidade, bairro,
                     numero, estado, descricao, nome, email, arquivoProtocolo, callback);
         }
+    }
+
+    public static void atualizarProtocolo(Protocolo protocolo, Context context) {
+        CidadeIluminadaService service = CidadeIluminadaAdapter.getCidadeIluminadaService();
+        CidadeIluminadaProtocoloCallback callback =
+                new CidadeIluminadaProtocoloCallback(protocolo, context);
+        service.atualizarProtocolo(protocolo.getCodProtocolo(), callback);
     }
 }

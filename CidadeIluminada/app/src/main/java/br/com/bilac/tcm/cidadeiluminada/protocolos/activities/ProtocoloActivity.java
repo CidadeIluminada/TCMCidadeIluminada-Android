@@ -24,7 +24,6 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -37,13 +36,6 @@ import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.validators.EmptyValidator;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.validators.ValidationState;
 import br.com.bilac.tcm.cidadeiluminada.services.CidadeIluminada;
-import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.CidadeIluminadaAdapter;
-import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.CidadeIluminadaService;
-import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.utils.CidadeIluminadaApiResponse;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
-import retrofit.mime.TypedFile;
 
 public class ProtocoloActivity extends Activity {
 
