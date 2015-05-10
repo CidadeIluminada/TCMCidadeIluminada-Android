@@ -1,8 +1,12 @@
 package br.com.bilac.tcm.cidadeiluminada.services;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.emil.android.util.Connectivity;
 
 import java.io.File;
 
@@ -42,9 +46,19 @@ public class CidadeIluminada {
             Toast.makeText(context, R.string.protocolo_envio_erro, Toast.LENGTH_LONG).show();
             Log.e("error", retrofitError.toString());
         }
+
+
     }
 
-    public static void enviarNovoProtocolo(Protocolo protocolo, Boolean anonimo, Context context) {
+    public static void enviarNovoProtocolo(Protocolo protocolo, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        boolean enviarRedeCelular = preferences.getBoolean(Constants.REDE_CELULAR_PREFERENCE_KEY, true);
+        if (!enviarRedeCelular && Connectivity.isConnectedMobile(context)) {
+            Toast.makeText(context, context.getString(R.string.enviar_fail_rede_celular),
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
         CidadeIluminadaService service = CidadeIluminadaAdapter.getCidadeIluminadaService();
 
         TypedFile arquivoProtocolo = new TypedFile(Constants.JPG_MIME_TYPE,
@@ -62,7 +76,7 @@ public class CidadeIluminada {
 
         CidadeIluminadaCallback callback = new CidadeIluminadaCallback(context);
 
-        if (anonimo) {
+        if (preferences.getBoolean(Constants.ANONIMO_PREFERENCE_KEY, true)) {
             service.novoProtocolo(codProtocolo, cep, logradouro, cidade, bairro, numero, estado,
                     descricao, arquivoProtocolo, callback);
         } else {

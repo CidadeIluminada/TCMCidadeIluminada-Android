@@ -166,7 +166,7 @@ public class ProtocoloActivity extends Activity {
 
             protocolo.save();
 
-            CidadeIluminada.enviarNovoProtocolo(protocolo, anonimo, getApplicationContext());
+            CidadeIluminada.enviarNovoProtocolo(protocolo, getApplicationContext());
 
         } else {
             Toast.makeText(this, R.string.erro_formulario_protocolo, Toast.LENGTH_SHORT).show();

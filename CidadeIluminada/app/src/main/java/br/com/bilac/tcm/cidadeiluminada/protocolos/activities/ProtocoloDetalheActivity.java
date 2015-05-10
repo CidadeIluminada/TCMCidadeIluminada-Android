@@ -2,17 +2,23 @@ package br.com.bilac.tcm.cidadeiluminada.protocolos.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.emil.android.util.Connectivity;
 
 import br.com.bilac.tcm.cidadeiluminada.CameraUtils;
 import br.com.bilac.tcm.cidadeiluminada.Constants;
 import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.activities.SettingsActivity;
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
+import br.com.bilac.tcm.cidadeiluminada.services.CidadeIluminada;
 
 /**
  * Created by Work on 04/05/2015.
@@ -99,6 +105,7 @@ public class ProtocoloDetalheActivity extends Activity{
     }
 
     public void enviarProtocolo(MenuItem item) {
+        CidadeIluminada.enviarNovoProtocolo(protocolo, getApplicationContext());
     }
 
     public void atualizarProtocolo(MenuItem item) {
