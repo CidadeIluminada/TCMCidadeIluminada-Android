@@ -45,6 +45,11 @@ public class CidadeIluminada {
         public void failure(RetrofitError retrofitError) {
             Toast.makeText(context, R.string.protocolo_envio_erro, Toast.LENGTH_LONG).show();
             Log.e("error", retrofitError.toString());
+            try {
+                CidadeIluminadaApiResponse response = (CidadeIluminadaApiResponse) retrofitError.getBody();
+                Log.e("fail", response.toString());
+            } catch (ClassCastException ignored) {
+            }
         }
 
 
