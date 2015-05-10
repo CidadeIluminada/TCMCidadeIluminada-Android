@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.support.v7.app.ActionBarActivity;
 
 import br.com.bilac.tcm.cidadeiluminada.Constants;
 import br.com.bilac.tcm.cidadeiluminada.R;
@@ -32,10 +31,23 @@ public class SettingsActivity extends Activity {
             sharedPreferences.registerOnSharedPreferenceChangeListener(this);
             findPreference(Constants.CEP_PREFERENCE_KEY)
                     .setSummary(sharedPreferences.getString(Constants.CEP_PREFERENCE_KEY, ""));
-            findPreference(Constants.NOME_PREFERENCE_KEY)
-                    .setSummary(sharedPreferences.getString(Constants.NOME_PREFERENCE_KEY, ""));
-            findPreference(Constants.EMAIL_PREFERENCE_KEY)
-                    .setSummary(sharedPreferences.getString(Constants.EMAIL_PREFERENCE_KEY, ""));
+            Preference nomePref = findPreference(Constants.NOME_PREFERENCE_KEY);
+            nomePref.setSummary(sharedPreferences.getString(Constants.NOME_PREFERENCE_KEY, ""));
+            nomePref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    return !((String) newValue).isEmpty();
+                }
+            });
+
+            Preference emailPref = findPreference(Constants.EMAIL_PREFERENCE_KEY);
+            emailPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    return ((String) newValue).matches("^.+@([^.@][^@]+)$");
+                }
+            });
+            emailPref.setSummary(sharedPreferences.getString(Constants.EMAIL_PREFERENCE_KEY, ""));
         }
 
         @Override
