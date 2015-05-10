@@ -1,4 +1,4 @@
-package br.com.bilac.tcm.cidadeiluminada.services.utils;
+package br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.utils;
 
 /**
  * Created by arthur on 04/04/15.

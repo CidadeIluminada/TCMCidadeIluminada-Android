@@ -1,6 +1,6 @@
-package br.com.bilac.tcm.cidadeiluminada.services;
+package br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada;
 
-import br.com.bilac.tcm.cidadeiluminada.services.utils.CidadeIluminadaApiResponse;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.utils.CidadeIluminadaApiResponse;
 import retrofit.Callback;
 import retrofit.http.Multipart;
 import retrofit.http.POST;

@@ -1,4 +1,4 @@
-package br.com.bilac.tcm.cidadeiluminada.services;
+package br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada;
 
 import br.com.bilac.tcm.cidadeiluminada.Constants;
 import retrofit.RestAdapter;

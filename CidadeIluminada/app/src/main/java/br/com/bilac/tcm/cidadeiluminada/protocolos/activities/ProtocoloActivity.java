@@ -36,9 +36,10 @@ import br.com.bilac.tcm.cidadeiluminada.activities.SettingsActivity;
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.validators.EmptyValidator;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.validators.ValidationState;
-import br.com.bilac.tcm.cidadeiluminada.services.CidadeIluminadaAdapter;
-import br.com.bilac.tcm.cidadeiluminada.services.CidadeIluminadaService;
-import br.com.bilac.tcm.cidadeiluminada.services.utils.CidadeIluminadaApiResponse;
+import br.com.bilac.tcm.cidadeiluminada.services.CidadeIluminada;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.CidadeIluminadaAdapter;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.CidadeIluminadaService;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.utils.CidadeIluminadaApiResponse;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -146,25 +147,6 @@ public class ProtocoloActivity extends Activity {
         startActivity(new Intent(this, SettingsActivity.class));
     }
 
-    private class CidadeIluminadaCallback implements Callback<CidadeIluminadaApiResponse> {
-
-        @Override
-        public void success(CidadeIluminadaApiResponse cidadeIluminadaApiResponse,
-                            Response response) {
-            Log.d("sucess", cidadeIluminadaApiResponse.toString() + " " +
-                    response.toString());
-            Toast.makeText(getApplicationContext(),
-                    R.string.protocolo_envio_sucesso, Toast.LENGTH_LONG).show();
-        }
-        @Override
-        public void failure(RetrofitError retrofitError) {
-            Toast.makeText(getApplicationContext(),
-                    R.string.protocolo_envio_erro,
-                    Toast.LENGTH_LONG).show();
-            Log.e("error", retrofitError.toString());
-        }
-    }
-
     private void enviarNovoProtocolo() {
         if (descricaoValidationState.isValid() && numeroValidationState.isValid()
                 && cepValidationState.isValid() && fileUri != null) {
@@ -184,30 +166,8 @@ public class ProtocoloActivity extends Activity {
 
             protocolo.save();
 
-            CidadeIluminadaService service = CidadeIluminadaAdapter.getCidadeIluminadaService();
+            CidadeIluminada.enviarNovoProtocolo(protocolo, anonimo, getApplicationContext());
 
-            TypedFile arquivoProtocolo = new TypedFile(Constants.JPG_MIME_TYPE,
-                    new File(protocolo.getArquivoProtocolo().getPath()));
-            String codProtocolo = protocolo.getCodProtocolo();
-            String cep = protocolo.getCep();
-            String logradouro = protocolo.getLogradouro();
-            String estado = protocolo.getEstado();
-            String cidade = protocolo.getCidade();
-            String bairro = protocolo.getBairro();
-            String numero = protocolo.getNumero();
-            String descricao = protocolo.getDescricao();
-            String nome = protocolo.getNome();
-            String email = protocolo.getEmail();
-
-            CidadeIluminadaCallback callback = new CidadeIluminadaCallback();
-
-            if (anonimo) {
-                service.novoProtocolo(codProtocolo, cep, logradouro, cidade, bairro, numero, estado,
-                        descricao, arquivoProtocolo, callback);
-            } else {
-                service.novoProtocoloIdentificado(codProtocolo, cep, logradouro, cidade, bairro,
-                        numero, estado, descricao, nome, email, arquivoProtocolo, callback);
-            }
         } else {
             Toast.makeText(this, R.string.erro_formulario_protocolo, Toast.LENGTH_SHORT).show();
         }
@@ -253,9 +213,5 @@ public class ProtocoloActivity extends Activity {
         ImageButton img = (ImageButton) findViewById(R.id.openCameraButton);
         Bitmap bmp = CameraUtils.decodeSampledBitmapFromFile(fileUri.getPath(), 128, 128);
         img.setImageBitmap(bmp);
-    }
-
-    public void openDetalhesProtocoloActivity(View view) {
-        startActivity(new Intent(this, ProtocoloDetalheActivity.class));
     }
 }
