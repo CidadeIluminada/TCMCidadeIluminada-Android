@@ -16,22 +16,9 @@ import java.io.File;
 public class CameraUtils {
     public static Bitmap decodeSampledBitmapFromFile(String path, int requiredWidth,
                                                       int requiredHeight) {
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        options.inPreferredConfig = Bitmap.Config.RGB_565;
-        int inSampleSize = 1;
-        if (height > requiredHeight) {
-            inSampleSize = Math.round((float)height / (float)requiredHeight);
-        }
-        int expectedWidth = width / inSampleSize;
-        if (expectedWidth > requiredWidth) {
-            inSampleSize = Math.round((float)width / (float)requiredWidth);
-        }
-        options.inSampleSize = inSampleSize;
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(path, options);
+
+        Bitmap bmp = BitmapFactory.decodeFile(path, null);
+        return Bitmap.createScaledBitmap(bmp, requiredWidth, requiredHeight, true);
     }
 
     public static Uri getOutputMediaFileUri(){

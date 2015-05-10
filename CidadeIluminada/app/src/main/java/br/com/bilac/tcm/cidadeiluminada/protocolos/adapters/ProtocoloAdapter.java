@@ -2,6 +2,7 @@ package br.com.bilac.tcm.cidadeiluminada.protocolos.adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,37 @@ import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
  * Created by arthur on 03/05/15.
  */
 public class ProtocoloAdapter extends ArrayAdapter<Protocolo> {
+    private class ImageViewProtocoloTuple {
+        private ImageView imageView;
+        private Protocolo protocolo;
+
+        public ImageViewProtocoloTuple(ImageView imageView, Protocolo protocolo) {
+            this.imageView = imageView;
+            this.protocolo = protocolo;
+        }
+    }
+    private class AsyncImageSetter extends AsyncTask<ImageViewProtocoloTuple, Void, Void> {
+
+        private Bitmap bmp;
+        private ImageView imageView;
+
+        @Override
+        protected Void doInBackground(ImageViewProtocoloTuple... params) {
+            Protocolo protocolo = params[0].protocolo;
+            imageView = params[0].imageView;
+            bmp = CameraUtils.decodeSampledBitmapFromFile(protocolo.getArquivoProtocolo().getPath(),
+                    32, 32);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            imageView.setImageBitmap(bmp);
+            bmp = null;
+            super.onPostExecute(aVoid);
+        }
+    }
+
     private ArrayList<Protocolo> protocolos;
 
     public ProtocoloAdapter(Context context, int resource, ArrayList<Protocolo> protocolos) {
@@ -42,8 +74,7 @@ public class ProtocoloAdapter extends ArrayAdapter<Protocolo> {
             TextView protocoloStatus = (TextView) convertView.findViewById(R.id.statusItemProtocolo);
 
             if (protocoloImagem != null) {
-                /*Bitmap bmp = CameraUtils.decodeSampledBitmapFromFile(protocolo.getArquivoProtocolo().getPath(), 32, 32);
-                protocoloImagem.setImageBitmap(bmp);*/
+                new AsyncImageSetter().execute(new ImageViewProtocoloTuple(protocoloImagem, protocolo));
             }
 
             if (protocoloNumero != null) {

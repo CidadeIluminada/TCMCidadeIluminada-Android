@@ -168,11 +168,19 @@ public class ProtocoloActivity extends Activity {
     private void enviarNovoProtocolo() {
         if (descricaoValidationState.isValid() && numeroValidationState.isValid()
                 && cepValidationState.isValid() && fileUri != null) {
+
             Protocolo protocolo =
                     Protocolo.novoProtocoloSJC(cepEditText.getText().toString(),
                             bairroEditText.getText().toString(), ruaEditText.getText().toString(),
-                            numeroEditText.getText().toString(),
-                            descricaoEditText.getText().toString(), fileUri);
+                            numeroEditText.getText().toString(), descricaoEditText.getText().toString(),
+                            "", "", fileUri);
+            SharedPreferences preferences = getSharedPreferences();
+            boolean anonimo = preferences.getBoolean(Constants.ANONIMO_PREFERENCE_KEY, true);
+
+            if (!anonimo) {
+                protocolo.setNome(preferences.getString(Constants.NOME_PREFERENCE_KEY, ""));
+                protocolo.setEmail(preferences.getString(Constants.EMAIL_PREFERENCE_KEY, ""));
+            }
 
             protocolo.save();
 
@@ -188,18 +196,15 @@ public class ProtocoloActivity extends Activity {
             String bairro = protocolo.getBairro();
             String numero = protocolo.getNumero();
             String descricao = protocolo.getDescricao();
+            String nome = protocolo.getNome();
+            String email = protocolo.getEmail();
 
             CidadeIluminadaCallback callback = new CidadeIluminadaCallback();
 
-            SharedPreferences preferences = getSharedPreferences();
-            boolean anonimo = preferences.getBoolean(Constants.ANONIMO_PREFERENCE_KEY, true);
             if (anonimo) {
                 service.novoProtocolo(codProtocolo, cep, logradouro, cidade, bairro, numero, estado,
                         descricao, arquivoProtocolo, callback);
             } else {
-                String nome = preferences.getString(Constants.NOME_PREFERENCE_KEY, "");
-                String email = preferences.getString(Constants.EMAIL_PREFERENCE_KEY, "");
-
                 service.novoProtocoloIdentificado(codProtocolo, cep, logradouro, cidade, bairro,
                         numero, estado, descricao, nome, email, arquivoProtocolo, callback);
             }

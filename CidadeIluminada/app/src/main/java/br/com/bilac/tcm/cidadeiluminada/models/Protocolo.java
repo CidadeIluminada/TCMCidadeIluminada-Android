@@ -4,6 +4,9 @@ import android.net.Uri;
 
 import com.orm.SugarRecord;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+
 import java.util.UUID;
 
 /**
@@ -20,13 +23,20 @@ public class Protocolo extends SugarRecord {
     private String numero;
     private String arquivo_protocolo;
     private String descricao;
+    private String nome;
+    private String email;
+
+    private String _timestamp;
+
 
     public Protocolo() {
     }
 
     public Protocolo(String cep, String estado, String cidade, String bairro, String logradouro,
-                     String numero, String descricao, String arquivo_protocolo) {
+                     String numero, String descricao, String nome, String email,
+                     String arquivo_protocolo) {
         this.cod_protocolo = UUID.randomUUID().toString();
+        this._timestamp = new DateTime(DateTimeZone.UTC).toString();
 
         this.cep = cep;
         this.estado = estado;
@@ -36,13 +46,15 @@ public class Protocolo extends SugarRecord {
         this.numero = numero;
         this.descricao = descricao;
         this.arquivo_protocolo = arquivo_protocolo;
+        this.nome = nome;
+        this.email = email;
     }
 
     public static Protocolo novoProtocoloSJC(String cep, String bairro, String logradouro,
-                                             String numero, String descricao,
-                                             Uri arquivo_protocolo) {
+                                             String numero, String descricao, String nome,
+                                             String email, Uri arquivo_protocolo) {
         return new Protocolo(cep, "SP", "Sâo José dos Campos", bairro, logradouro, numero,
-                descricao, arquivo_protocolo.toString());
+                descricao, nome, email, arquivo_protocolo.toString());
     }
 
     public String getCep() {
@@ -79,5 +91,21 @@ public class Protocolo extends SugarRecord {
 
     public String getDescricao() {
         return descricao;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }
