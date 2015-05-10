@@ -10,6 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
+import com.orm.StringUtil;
+import com.orm.query.Select;
+
 import java.util.ArrayList;
 
 import br.com.bilac.tcm.cidadeiluminada.Constants;
@@ -33,7 +36,10 @@ public class ProtocolosListaActivity extends ListActivity {
     private Handler protocoloListHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            protocolos = (ArrayList<Protocolo>) Protocolo.listAll(Protocolo.class);
+            //TODO: Descomentar linha abaixo quando o Sugar lançar a função listAll com order_by
+            //https://github.com/satyan/sugar/blob/6bea27ce694cd548462440b48e5e64fb989b10ed/library/src/main/java/com/orm/SugarRecord.java#L93
+            //protocolos = (ArrayList<Protocolo>) Protocolo.listAll(Protocolo.class, "ID DESC");
+            protocolos = (ArrayList<Protocolo>) Protocolo.find(Protocolo.class, null, null, null, "ID DESC", null);
             protocoloAdapter = new ProtocoloAdapter(ProtocolosListaActivity.this,
                     R.layout.protocolo_item_view, protocolos);
             setListAdapter(protocoloAdapter);
