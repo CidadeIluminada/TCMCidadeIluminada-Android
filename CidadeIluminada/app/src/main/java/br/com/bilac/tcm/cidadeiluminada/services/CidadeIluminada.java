@@ -29,9 +29,11 @@ public class CidadeIluminada {
     private static class CidadeIluminadaCallback implements Callback<CidadeIluminadaApiResponse> {
 
         private Context context;
+        private Protocolo protocolo;
 
-        public CidadeIluminadaCallback(Context context) {
+        public CidadeIluminadaCallback(Protocolo protocolo, Context context) {
             this.context = context;
+            this.protocolo = protocolo;
         }
 
         @Override
@@ -40,6 +42,7 @@ public class CidadeIluminada {
             Log.d("sucess", cidadeIluminadaApiResponse.toString() + " " +
                     response.toString());
             Toast.makeText(context, R.string.protocolo_envio_sucesso, Toast.LENGTH_SHORT).show();
+            protocolo.setStatus(cidadeIluminadaApiResponse.getProtocolo().getStatus());
         }
         @Override
         public void failure(RetrofitError retrofitError) {
@@ -48,7 +51,8 @@ public class CidadeIluminada {
             try {
                 CidadeIluminadaApiResponse response = (CidadeIluminadaApiResponse) retrofitError.getBody();
                 Log.e("fail", response.toString());
-            } catch (ClassCastException ignored) {
+            } catch (ClassCastException exception) {
+                Log.w("failCC", exception.getMessage());
             }
         }
 
@@ -79,7 +83,7 @@ public class CidadeIluminada {
         String nome = protocolo.getNome();
         String email = protocolo.getEmail();
 
-        CidadeIluminadaCallback callback = new CidadeIluminadaCallback(context);
+        CidadeIluminadaCallback callback = new CidadeIluminadaCallback(protocolo, context);
 
         if (preferences.getBoolean(Constants.ANONIMO_PREFERENCE_KEY, true)) {
             service.novoProtocolo(codProtocolo, cep, logradouro, cidade, bairro, numero, estado,

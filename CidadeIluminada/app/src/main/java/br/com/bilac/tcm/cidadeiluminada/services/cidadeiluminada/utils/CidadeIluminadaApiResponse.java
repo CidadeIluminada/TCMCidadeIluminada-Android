@@ -5,12 +5,23 @@ package br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.utils;
  */
 public class CidadeIluminadaApiResponse {
     private String status;
-    private String cod_protocolo;
+
+    public Protocolo getProtocolo() {
+        return protocolo;
+    }
 
     private static class Errors {
         private String cod_protocolo;
         private String cep;
+        private String email;
+        private String nome;
+        private String estado;
+        private String cidade;
+        private String bairro;
+        private String logradouro;
+        private String numero;
         private String arquivo_protocolo;
+
 
         public Errors() {
         }
@@ -20,12 +31,41 @@ public class CidadeIluminadaApiResponse {
             return "Errors{" +
                     "cod_protocolo='" + cod_protocolo + '\'' +
                     ", cep='" + cep + '\'' +
+                    ", email='" + email + '\'' +
+                    ", nome='" + nome + '\'' +
+                    ", estado='" + estado + '\'' +
+                    ", cidade='" + cidade + '\'' +
+                    ", bairro='" + bairro + '\'' +
+                    ", logradouro='" + logradouro + '\'' +
+                    ", numero='" + numero + '\'' +
                     ", arquivo_protocolo='" + arquivo_protocolo + '\'' +
                     '}';
         }
     }
 
     private Errors errors;
+
+    public static class Protocolo {
+        private String cod_protocolo;
+        private String status;
+
+        public Protocolo() {
+        }
+
+        @Override
+        public String toString() {
+            return "Protocolo{" +
+                    "cod_protocolo='" + cod_protocolo + '\'' +
+                    ", status='" + status + '\'' +
+                    '}';
+        }
+
+        public String getStatus() {
+            return status;
+        }
+    }
+
+    private Protocolo protocolo;
 
     public CidadeIluminadaApiResponse() {
     }
@@ -34,8 +74,8 @@ public class CidadeIluminadaApiResponse {
     public String toString() {
         return "CidadeIluminadaApiResponse{" +
                 "status='" + status + '\'' +
-                ", cod_protocolo='" + cod_protocolo + '\'' +
                 ", errors=" + errors +
+                ", protocolo=" + protocolo +
                 '}';
     }
 }
