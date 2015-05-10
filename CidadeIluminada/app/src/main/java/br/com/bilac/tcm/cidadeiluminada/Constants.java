@@ -6,6 +6,7 @@ package br.com.bilac.tcm.cidadeiluminada;
 public final class Constants {
     public static final int CAMERA_REQUEST_CODE = 1;
     public static final int PLACE_PICKER_REQUEST_CODE = 2;
+    public static final int NOVO_PROTOCOLO_REQUEST_CODE = 3;
 
     public static final String PACKAGE = "br.com.bilac.tcm.cidadeiluminada";
     public static final String KEY_FILE_URI = PACKAGE + ".FILE_URI";

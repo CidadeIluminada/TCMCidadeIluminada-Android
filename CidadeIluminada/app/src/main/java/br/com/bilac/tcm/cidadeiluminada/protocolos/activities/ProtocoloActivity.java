@@ -160,6 +160,10 @@ public class ProtocoloActivity extends Activity {
 
             CidadeIluminada.enviarNovoProtocolo(protocolo, getApplicationContext());
 
+            Intent intent = new Intent();
+            intent.putExtra(Constants.PROTOCOLO_ID_KEY, protocolo.getId());
+            setResult(RESULT_OK, intent);
+            finish();
         } else {
             Toast.makeText(this, R.string.erro_formulario_protocolo, Toast.LENGTH_SHORT).show();
         }

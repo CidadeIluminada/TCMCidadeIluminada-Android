@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import br.com.bilac.tcm.cidadeiluminada.Constants;
 import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.activities.ProtocoloActivity;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.activities.ProtocolosListaActivity;
@@ -44,8 +45,24 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.NOVO_PROTOCOLO_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                long protocoloId = data.getLongExtra(Constants.PROTOCOLO_ID_KEY, -1);
+                if (protocoloId == -1) {
+                    return;
+                }
+                Intent listaIntent = new Intent(this, ProtocolosListaActivity.class);
+                listaIntent.putExtra(Constants.PROTOCOLO_ID_KEY, protocoloId);
+                startActivity(listaIntent);
+            }
+        }
+    }
+
     public void openProtocoloActivity(View view) {
-        startActivity(new Intent(this, ProtocoloActivity.class));
+        startActivityForResult(new Intent(this, ProtocoloActivity.class),
+                Constants.NOVO_PROTOCOLO_REQUEST_CODE);
     }
 
     public void openListaProtocolosActivity(View view) {

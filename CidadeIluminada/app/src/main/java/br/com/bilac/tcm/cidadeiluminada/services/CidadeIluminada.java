@@ -16,7 +16,6 @@ import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.CidadeIluminada
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.CidadeIluminadaService;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.callbacks.CidadeIluminadaApiCallback;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.callbacks.CidadeIluminadaProtocoloCallback;
-import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.models.CidadeIluminadaProtocoloApiResponse;
 import retrofit.mime.TypedFile;
 
 /**
