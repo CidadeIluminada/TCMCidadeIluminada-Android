@@ -30,7 +30,7 @@ public class CidadeIluminadaProtocoloCallback implements Callback<CidadeIluminad
     public void success(CidadeIluminadaProtocoloApiResponse cidadeIluminadaProtocoloApiResponse, Response response) {
         Protocolo payload = cidadeIluminadaProtocoloApiResponse.getPayload();
         protocolo.setStatus(payload.getStatus());
-        // Atualizar o resto quando precisar?
+        //TODO: Atualizar o resto quando precisar
         protocolo.save();
         try {
             ProtocoloDetalheActivity detalheActivity = (ProtocoloDetalheActivity) context;
