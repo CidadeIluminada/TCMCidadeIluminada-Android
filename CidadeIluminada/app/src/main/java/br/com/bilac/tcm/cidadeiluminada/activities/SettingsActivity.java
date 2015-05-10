@@ -29,8 +29,16 @@ public class SettingsActivity extends Activity {
             addPreferencesFromResource(R.xml.pref_general);
             SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
             sharedPreferences.registerOnSharedPreferenceChangeListener(this);
-            findPreference(Constants.CEP_PREFERENCE_KEY)
-                    .setSummary(sharedPreferences.getString(Constants.CEP_PREFERENCE_KEY, ""));
+
+            Preference cepPref = findPreference(Constants.CEP_PREFERENCE_KEY);
+            cepPref.setSummary(sharedPreferences.getString(Constants.CEP_PREFERENCE_KEY, ""));
+            cepPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    return ((String) newValue).matches("^\\d{5}-?\\d{3}$");
+                }
+            });
+
             Preference nomePref = findPreference(Constants.NOME_PREFERENCE_KEY);
             nomePref.setSummary(sharedPreferences.getString(Constants.NOME_PREFERENCE_KEY, ""));
             nomePref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
