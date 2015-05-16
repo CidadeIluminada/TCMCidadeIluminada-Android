@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +22,13 @@ import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.activities.SettingsActivity;
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
 import br.com.bilac.tcm.cidadeiluminada.services.CidadeIluminada;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.ProtocoloUploadListener;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.models.CidadeIluminadaApiResponse;
 
 /**
  * Created by Work on 04/05/2015.
  */
-public class ProtocoloDetalheActivity extends Activity{
+public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploadListener{
 
     private Protocolo protocolo;
 
@@ -103,10 +108,17 @@ public class ProtocoloDetalheActivity extends Activity{
     }
 
     public void enviarProtocolo(MenuItem item) {
-        CidadeIluminada.enviarNovoProtocolo(protocolo, getApplicationContext());
+        CidadeIluminada.enviarNovoProtocolo(protocolo, this);
     }
 
     public void atualizarProtocolo(MenuItem item) {
         CidadeIluminada.atualizarProtocolo(protocolo, this);
+    }
+
+    @Override
+    public void onUploadResult(CidadeIluminadaApiResponse response) {
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.protocoloProgressBar);
+        progressBar.setVisibility(View.GONE);
+        Log.d("upload response", response.toString());
     }
 }

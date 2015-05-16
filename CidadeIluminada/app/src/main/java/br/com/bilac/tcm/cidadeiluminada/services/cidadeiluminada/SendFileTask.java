@@ -1,11 +1,16 @@
 package br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import java.io.File;
 
 import br.com.bilac.tcm.cidadeiluminada.Constants;
+import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.models.CidadeIluminadaApiResponse;
 import retrofit.mime.TypedFile;
@@ -16,9 +21,20 @@ import retrofit.mime.TypedFile;
 public class SendFileTask extends AsyncTask<Protocolo, Integer, CidadeIluminadaApiResponse> {
 
     private boolean anonimo;
+    private ProgressBar progressBar;
+    private ProtocoloUploadListener listener;
 
-    public SendFileTask(boolean anonimo) {
+    public SendFileTask(Activity activity, ProtocoloUploadListener listener, boolean anonimo) {
+        this.listener = listener;
         this.anonimo = anonimo;
+
+        progressBar = (ProgressBar) activity.findViewById(R.id.protocoloProgressBar);
+    }
+
+    @Override
+    protected void onPreExecute() {
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setIndeterminate(true);
     }
 
     @Override
@@ -62,7 +78,14 @@ public class SendFileTask extends AsyncTask<Protocolo, Integer, CidadeIluminadaA
     @Override
     protected void onProgressUpdate(Integer... values) {
         Log.d("progressUpdate", String.format("progress[%d]", values[0]));
-        //do something with values[0], its the percentage so you can easily do
-        //progressBar.setProgress(values[0]);
+        if (progressBar.isIndeterminate()) {
+            progressBar.setIndeterminate(false);
+        }
+        progressBar.setProgress(values[0]);
+    }
+
+    @Override
+    protected void onPostExecute(CidadeIluminadaApiResponse response) {
+        listener.onUploadResult(response);
     }
 }

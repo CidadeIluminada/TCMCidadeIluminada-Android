@@ -159,9 +159,7 @@ public class ProtocoloActivity extends Activity {
 
             protocolo.save();
 
-            CidadeIluminada.enviarNovoProtocolo(protocolo, getApplicationContext());
-
-
+            //CidadeIluminada.enviarNovoProtocolo(protocolo, getApplicationContext());
 
             Intent intent = new Intent();
             intent.putExtra(Constants.PROTOCOLO_ID_KEY, protocolo.getId());
