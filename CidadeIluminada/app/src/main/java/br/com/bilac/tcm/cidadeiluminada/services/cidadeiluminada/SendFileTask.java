@@ -14,7 +14,11 @@ import retrofit.mime.TypedFile;
  * Created by arthur on 16/05/15.
  */
 public class SendFileTask extends AsyncTask<Protocolo, Integer, CidadeIluminadaApiResponse> {
-    public SendFileTask() {
+
+    private boolean anonimo;
+
+    public SendFileTask(boolean anonimo) {
+        this.anonimo = anonimo;
     }
 
     @Override
@@ -44,7 +48,15 @@ public class SendFileTask extends AsyncTask<Protocolo, Integer, CidadeIluminadaA
         String email = protocolo.getEmail();
 
         CidadeIluminadaService service = CidadeIluminadaAdapter.getCidadeIluminadaService();
-        return service.novoProtocolo(codProtocolo, cep, logradouro, cidade, bairro, numero, estado, descricao, arquivoProtocolo);
+        CidadeIluminadaApiResponse response;
+        if (anonimo) {
+            response = service.novoProtocolo(codProtocolo, cep, logradouro, cidade, bairro, numero, estado,
+                    descricao, arquivoProtocolo);
+        } else {
+            response =service.novoProtocoloIdentificado(codProtocolo, cep, logradouro, cidade, bairro,
+                    numero, estado, descricao, nome, email, arquivoProtocolo);
+        }
+        return response;
     }
 
     @Override

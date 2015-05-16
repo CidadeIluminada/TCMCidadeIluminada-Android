@@ -14,9 +14,8 @@ import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.CidadeIluminadaAdapter;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.CidadeIluminadaService;
-import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.callbacks.CidadeIluminadaApiCallback;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.SendFileTask;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.callbacks.CidadeIluminadaProtocoloCallback;
-import retrofit.mime.TypedFile;
 
 /**
  * Created by arthur on 10/05/15.
@@ -32,30 +31,9 @@ public class CidadeIluminada {
                     Toast.LENGTH_LONG).show();
             return;
         }
-        CidadeIluminadaService service = CidadeIluminadaAdapter.getCidadeIluminadaService();
 
-        TypedFile arquivoProtocolo = new TypedFile(Constants.JPG_MIME_TYPE,
-                new File(protocolo.getArquivoProtocolo().getPath()));
-        String codProtocolo = protocolo.getCodProtocolo();
-        String cep = protocolo.getCep();
-        String logradouro = protocolo.getLogradouro();
-        String estado = protocolo.getEstado();
-        String cidade = protocolo.getCidade();
-        String bairro = protocolo.getBairro();
-        String numero = protocolo.getNumero();
-        String descricao = protocolo.getDescricao();
-        String nome = protocolo.getNome();
-        String email = protocolo.getEmail();
-
-        CidadeIluminadaApiCallback callback = new CidadeIluminadaApiCallback(protocolo, context);
-
-        if (preferences.getBoolean(Constants.ANONIMO_PREFERENCE_KEY, true)) {
-            service.novoProtocolo(codProtocolo, cep, logradouro, cidade, bairro, numero, estado,
-                    descricao, arquivoProtocolo, callback);
-        } else {
-            service.novoProtocoloIdentificado(codProtocolo, cep, logradouro, cidade, bairro,
-                    numero, estado, descricao, nome, email, arquivoProtocolo, callback);
-        }
+        boolean anonimo = preferences.getBoolean(Constants.ANONIMO_PREFERENCE_KEY, true);
+        new SendFileTask(anonimo).execute(protocolo);
     }
 
     public static void atualizarProtocolo(Protocolo protocolo, Context context) {
