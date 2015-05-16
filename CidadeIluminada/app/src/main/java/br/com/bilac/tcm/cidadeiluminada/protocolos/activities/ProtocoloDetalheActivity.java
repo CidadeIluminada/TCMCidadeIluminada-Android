@@ -2,9 +2,7 @@ package br.com.bilac.tcm.cidadeiluminada.protocolos.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,9 +10,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.emil.android.util.Connectivity;
 
 import br.com.bilac.tcm.cidadeiluminada.CameraUtils;
 import br.com.bilac.tcm.cidadeiluminada.Constants;
@@ -46,6 +41,9 @@ public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploa
 
         protocolo = Protocolo.findById(Protocolo.class, protocoloId);
         preencherDadosProtocolo(protocolo);
+        if (protocolo.getStatus().equals(Protocolo.NAO_ENVIADO)) {
+            enviarProtocolo(protocolo);
+        }
     }
 
     public void preencherDadosProtocolo(Protocolo protocolo) {
@@ -107,7 +105,11 @@ public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploa
         startActivity(new Intent(this, SettingsActivity.class));
     }
 
-    public void enviarProtocolo(MenuItem item) {
+    public void enviarProtocoloMenu(MenuItem item) {
+        enviarProtocolo(protocolo);
+    }
+
+    private void enviarProtocolo(Protocolo protocolo) {
         CidadeIluminada.enviarNovoProtocolo(protocolo, this);
     }
 
@@ -120,5 +122,7 @@ public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploa
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.protocoloProgressBar);
         progressBar.setVisibility(View.GONE);
         Log.d("upload response", response.toString());
+        protocolo.update(response.getProtocolo());
+        preencherDadosProtocolo(protocolo);
     }
 }

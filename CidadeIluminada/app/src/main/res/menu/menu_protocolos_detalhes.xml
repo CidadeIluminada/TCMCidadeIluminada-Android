@@ -3,7 +3,7 @@
     <item
         android:id="@+id/action_novo_protocolo"
         android:icon="@drawable/ic_send_white_36dp"
-        android:onClick="enviarProtocolo"
+        android:onClick="enviarProtocoloMenu"
         android:title="@string/label_action_novo_protocolo"
         android:showAsAction="always|withText"
         />

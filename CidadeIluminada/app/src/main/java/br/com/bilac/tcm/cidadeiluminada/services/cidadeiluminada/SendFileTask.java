@@ -33,8 +33,10 @@ public class SendFileTask extends AsyncTask<Protocolo, Integer, CidadeIluminadaA
 
     @Override
     protected void onPreExecute() {
-        progressBar.setVisibility(View.VISIBLE);
-        progressBar.setIndeterminate(true);
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setIndeterminate(true);
+        }
     }
 
     @Override
@@ -78,10 +80,12 @@ public class SendFileTask extends AsyncTask<Protocolo, Integer, CidadeIluminadaA
     @Override
     protected void onProgressUpdate(Integer... values) {
         Log.d("progressUpdate", String.format("progress[%d]", values[0]));
-        if (progressBar.isIndeterminate()) {
-            progressBar.setIndeterminate(false);
+        if (progressBar != null) {
+            if (progressBar.isIndeterminate()) {
+                progressBar.setIndeterminate(false);
+            }
+            progressBar.setProgress(values[0]);
         }
-        progressBar.setProgress(values[0]);
     }
 
     @Override

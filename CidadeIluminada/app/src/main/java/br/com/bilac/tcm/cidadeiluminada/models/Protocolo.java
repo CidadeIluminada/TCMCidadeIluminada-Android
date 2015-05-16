@@ -141,4 +141,10 @@ public class Protocolo extends SugarRecord {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public void update(Protocolo protocolo) {
+        setStatus(protocolo.getStatus());
+        // Atualizar o resto
+        save();
+    }
 }
