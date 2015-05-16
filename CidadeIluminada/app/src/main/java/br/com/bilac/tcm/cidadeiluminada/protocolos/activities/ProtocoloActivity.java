@@ -36,6 +36,7 @@ import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.validators.EmptyValidator;
 import br.com.bilac.tcm.cidadeiluminada.protocolos.validators.ValidationState;
 import br.com.bilac.tcm.cidadeiluminada.services.CidadeIluminada;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.SendFileTask;
 
 public class ProtocoloActivity extends Activity {
 
@@ -158,7 +159,9 @@ public class ProtocoloActivity extends Activity {
 
             protocolo.save();
 
-            CidadeIluminada.enviarNovoProtocolo(protocolo, getApplicationContext());
+            //CidadeIluminada.enviarNovoProtocolo(protocolo, getApplicationContext());
+
+            new SendFileTask().execute(protocolo);
 
             Intent intent = new Intent();
             intent.putExtra(Constants.PROTOCOLO_ID_KEY, protocolo.getId());

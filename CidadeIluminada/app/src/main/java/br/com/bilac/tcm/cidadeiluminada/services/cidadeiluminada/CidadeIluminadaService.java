@@ -27,6 +27,19 @@ public interface CidadeIluminadaService {
                        @Part("descricao") String descricao,
                        @Part("arquivo_protocolo") TypedFile arquivo_protocolo,
                        Callback<CidadeIluminadaApiResponse> callback);
+
+    @Multipart
+    @POST("/protocolos/novo/")
+    CidadeIluminadaApiResponse novoProtocolo(@Part("cod_protocolo") String cod_protocolo,
+                       @Part("cep") String cep,
+                       @Part("logradouro") String logradouro,
+                       @Part("cidade") String cidade,
+                       @Part("bairro") String bairro,
+                       @Part("numero") String numero,
+                       @Part("estado") String estado,
+                       @Part("descricao") String descricao,
+                       @Part("arquivo_protocolo") TypedFile arquivo_protocolo);
+
     @Multipart
     @POST("/protocolos/novo/")
     void novoProtocoloIdentificado(@Part("cod_protocolo") String cod_protocolo,
