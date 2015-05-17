@@ -59,9 +59,14 @@ public class ProtocolosListaActivity extends ListActivity {
         protocoloAdapter = new ProtocoloAdapter(this, R.layout.protocolo_item_view,
                 new ArrayList<Protocolo>());
         setListAdapter(protocoloAdapter);
-        new Thread(null, protocolosListRunnable, "FillProtocolosThread").start();
+
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        new Thread(null, protocolosListRunnable, "FillProtocolosThread").start();
+    }
 
     private void startProtocolosDetalhes(long protocoloId) {
         Intent startShowProtocolo = new Intent(getApplicationContext(),
