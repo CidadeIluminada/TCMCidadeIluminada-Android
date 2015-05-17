@@ -42,6 +42,5 @@ public interface CidadeIluminadaService {
                                    @Part("arquivo_protocolo") TypedFile arquivo_protocolo);
 
     @GET("/protocolos/protocolo.json")
-    void atualizarProtocolo(@Query("cod_protocolo") String codProtocolo,
-                            Callback<CidadeIluminadaProtocoloApiResponse> callback);
+    CidadeIluminadaProtocoloApiResponse atualizarProtocolo(@Query("cod_protocolo") String codProtocolo);
 }

@@ -3,7 +3,6 @@ package br.com.bilac.tcm.cidadeiluminada.services;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
@@ -14,8 +13,8 @@ import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.CidadeIluminadaAdapter;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.CidadeIluminadaService;
-import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.ProtocoloUploadListener;
-import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.SendFileTask;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.listeners.ProtocoloUploadListener;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.tasks.SendFileTask;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.callbacks.CidadeIluminadaProtocoloCallback;
 
 /**

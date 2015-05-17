@@ -1,10 +1,11 @@
-package br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada;
+package br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.etc;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.listeners.ProgressListener;
 import retrofit.mime.TypedFile;
 
 /**

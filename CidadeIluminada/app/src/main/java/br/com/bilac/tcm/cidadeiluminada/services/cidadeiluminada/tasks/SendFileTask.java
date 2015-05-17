@@ -1,7 +1,6 @@
-package br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada;
+package br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.tasks;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +11,11 @@ import java.io.File;
 import br.com.bilac.tcm.cidadeiluminada.Constants;
 import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.CidadeIluminadaAdapter;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.CidadeIluminadaService;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.etc.CountedTypedFile;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.listeners.ProgressListener;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.listeners.ProtocoloUploadListener;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.models.CidadeIluminadaApiResponse;
 import retrofit.RetrofitError;
 import retrofit.mime.TypedFile;

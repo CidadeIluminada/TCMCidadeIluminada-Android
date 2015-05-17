@@ -10,7 +10,7 @@
         />
     <item
         android:id="@+id/action_atualizar_protocolo"
-        android:onClick="atualizarProtocolo"
+        android:onClick="atualizarProtocoloMenu"
         android:icon="@drawable/ic_refresh_white_36dp"
         android:title="@string/label_action_atualizar_protocolo"
         android:showAsAction="always|withText"
