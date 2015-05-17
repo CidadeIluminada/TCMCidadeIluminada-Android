@@ -1,5 +1,7 @@
 package br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.models;
 
+import java.util.Arrays;
+
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
 
 /**
@@ -14,10 +16,10 @@ public class CidadeIluminadaApiResponse {
 
     private static class Errors {
         private String cod_protocolo;
-        private String cep;
-        private String email;
+        private String[] cep;
+        private String[] email;
         private String nome;
-        private String estado;
+        private String[] estado;
         private String cidade;
         private String bairro;
         private String logradouro;
@@ -32,10 +34,10 @@ public class CidadeIluminadaApiResponse {
         public String toString() {
             return "Errors{" +
                     "cod_protocolo='" + cod_protocolo + '\'' +
-                    ", cep='" + cep + '\'' +
-                    ", email='" + email + '\'' +
+                    ", cep=" + Arrays.toString(cep) +
+                    ", email=" + Arrays.toString(email) +
                     ", nome='" + nome + '\'' +
-                    ", estado='" + estado + '\'' +
+                    ", estado=" + Arrays.toString(estado) +
                     ", cidade='" + cidade + '\'' +
                     ", bairro='" + bairro + '\'' +
                     ", logradouro='" + logradouro + '\'' +
@@ -60,4 +62,11 @@ public class CidadeIluminadaApiResponse {
                 ", protocolo=" + protocolo +
                 '}';
     }
+
+    public boolean isOk() {
+        return status.equals(STATUS_OK);
+    }
+
+    public static final String STATUS_OK = "OK";
+    public static final String STATUS_ERROR = "ERROR";
 }

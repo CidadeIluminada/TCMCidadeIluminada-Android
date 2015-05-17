@@ -13,6 +13,7 @@ import br.com.bilac.tcm.cidadeiluminada.Constants;
 import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.models.CidadeIluminadaApiResponse;
+import retrofit.RetrofitError;
 import retrofit.mime.TypedFile;
 
 /**
@@ -67,14 +68,18 @@ public class SendFileTask extends AsyncTask<Protocolo, Integer, CidadeIluminadaA
 
         CidadeIluminadaService service = CidadeIluminadaAdapter.getCidadeIluminadaService();
         CidadeIluminadaApiResponse response;
-        if (anonimo) {
-            response = service.novoProtocolo(codProtocolo, cep, logradouro, cidade, bairro, numero, estado,
-                    descricao, arquivoProtocolo);
-        } else {
-            response =service.novoProtocoloIdentificado(codProtocolo, cep, logradouro, cidade, bairro,
-                    numero, estado, descricao, nome, email, arquivoProtocolo);
+        try {
+            if (anonimo) {
+                response = service.novoProtocolo(codProtocolo, cep, logradouro, cidade, bairro, numero, estado,
+                        descricao, arquivoProtocolo);
+            } else {
+                response = service.novoProtocoloIdentificado(codProtocolo, cep, logradouro, cidade, bairro,
+                        numero, estado, descricao, nome, email, arquivoProtocolo);
+            }
+            return response;
+        } catch (RetrofitError retrofitError) {
+            return (CidadeIluminadaApiResponse) retrofitError.getBodyAs(CidadeIluminadaApiResponse.class);
         }
-        return response;
     }
 
     @Override

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import br.com.bilac.tcm.cidadeiluminada.CameraUtils;
 import br.com.bilac.tcm.cidadeiluminada.Constants;
@@ -85,7 +86,7 @@ public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploa
             item = menu.findItem(R.id.action_novo_protocolo);
         }
         item.setVisible(false);
-        this.invalidateOptionsMenu();
+        invalidateOptionsMenu();
 
         return true;
     }
@@ -122,7 +123,12 @@ public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploa
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.protocoloProgressBar);
         progressBar.setVisibility(View.GONE);
         Log.d("upload response", response.toString());
-        protocolo.update(response.getProtocolo());
-        preencherDadosProtocolo(protocolo);
+        if (response.isOk()) {
+            protocolo.update(response.getProtocolo());
+            preencherDadosProtocolo(protocolo);
+        } else {
+            //TODO: Pegar o erro certinho
+            Toast.makeText(this, getText(R.string.protocolo_envio_erro), Toast.LENGTH_LONG).show();
+        }
     }
 }
