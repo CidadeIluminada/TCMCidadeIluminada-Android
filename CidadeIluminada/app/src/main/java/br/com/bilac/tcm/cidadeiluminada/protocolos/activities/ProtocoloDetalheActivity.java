@@ -3,7 +3,6 @@ package br.com.bilac.tcm.cidadeiluminada.protocolos.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +17,7 @@ import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.activities.SettingsActivity;
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
 import br.com.bilac.tcm.cidadeiluminada.services.CidadeIluminada;
-import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.ProtocoloUploadListener;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.listeners.ProtocoloUploadListener;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.models.CidadeIluminadaApiResponse;
 
 /**
@@ -43,8 +42,11 @@ public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploa
 
         protocolo = Protocolo.findById(Protocolo.class, protocoloId);
         preencherDadosProtocolo(protocolo);
-        if (protocolo.getStatus().equals(Protocolo.NAO_ENVIADO)) {
+        String protocoloStatus = protocolo.getStatus();
+        if (protocoloStatus.equals(Protocolo.NAO_ENVIADO)) {
             enviarProtocolo(protocolo);
+        } else if (protocoloStatus.equals(Protocolo.NOVO)) {
+            atualizarProtocolo(protocolo);
         }
     }
 
@@ -78,16 +80,6 @@ public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploa
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_protocolos_detalhes, menu);
-
-        String protocoloStatus = protocolo.getStatus();
-        MenuItem item;
-        if (protocoloStatus.equals(Protocolo.NAO_ENVIADO)) {
-            item = menu.findItem(R.id.action_atualizar_protocolo);
-        } else {
-            item = menu.findItem(R.id.action_novo_protocolo);
-        }
-        item.setVisible(false);
-        invalidateOptionsMenu();
         this.menu = menu;
         return true;
     }
@@ -116,8 +108,14 @@ public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploa
         CidadeIluminada.enviarNovoProtocolo(protocolo, this);
     }
 
-    public void atualizarProtocolo(MenuItem item) {
+    public void atualizarProtocoloMenu(MenuItem item) {
+        atualizarProtocolo(protocolo);
+    }
+
+    private void atualizarProtocolo(Protocolo protocolo) {
+        visibleMenuItem(R.id.action_atualizar_protocolo, false);
         CidadeIluminada.atualizarProtocolo(protocolo, this);
+        visibleMenuItem(R.id.action_atualizar_protocolo, true);
     }
 
     private void visibleMenuItem(int resId, boolean visible) {
