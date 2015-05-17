@@ -130,13 +130,13 @@ public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploa
 
     @Override
     public void onUploadResult(CidadeIluminadaApiResponse response) {
-        visibleMenuItem(R.id.action_detalhes_novo_protocolo, true);
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.protocoloProgressBar);
         progressBar.setVisibility(View.GONE);
         if (response.isOk()) {
-            protocolo.update(response.getProtocolo());
             preencherDadosProtocolo(protocolo);
+            visibleMenuItem(R.id.action_atualizar_protocolo, true);
         } else {
+            visibleMenuItem(R.id.action_detalhes_novo_protocolo, true);
             //TODO: Pegar o erro certinho
             Toast.makeText(this, getText(R.string.protocolo_envio_erro), Toast.LENGTH_LONG).show();
         }

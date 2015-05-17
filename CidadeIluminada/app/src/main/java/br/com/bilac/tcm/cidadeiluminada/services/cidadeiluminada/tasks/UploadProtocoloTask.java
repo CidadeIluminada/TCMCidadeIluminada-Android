@@ -23,13 +23,15 @@ import retrofit.mime.TypedFile;
 /**
  * Created by arthur on 16/05/15.
  */
-public class SendFileTask extends AsyncTask<Protocolo, Integer, CidadeIluminadaApiResponse> {
+public class UploadProtocoloTask extends AsyncTask<Protocolo, Integer, CidadeIluminadaApiResponse> {
 
     private boolean anonimo;
     private ProgressBar progressBar;
     private ProtocoloUploadListener listener;
 
-    public SendFileTask(Activity activity, ProtocoloUploadListener listener, boolean anonimo) {
+    private Protocolo protocolo;
+
+    public UploadProtocoloTask(Activity activity, ProtocoloUploadListener listener, boolean anonimo) {
         this.listener = listener;
         this.anonimo = anonimo;
 
@@ -46,7 +48,7 @@ public class SendFileTask extends AsyncTask<Protocolo, Integer, CidadeIluminadaA
 
     @Override
     protected CidadeIluminadaApiResponse doInBackground(Protocolo... params) {
-        Protocolo protocolo = params[0];
+        protocolo = params[0];
         File file = new File(protocolo.getArquivoProtocolo().getPath());
         final long totalSize = file.length();
         Log.d("Upload FileSize[%d]", String.valueOf(totalSize));
@@ -103,6 +105,10 @@ public class SendFileTask extends AsyncTask<Protocolo, Integer, CidadeIluminadaA
 
     @Override
     protected void onPostExecute(CidadeIluminadaApiResponse response) {
+        progressBar.setIndeterminate(true);
+        if (response.isOk()) {
+            protocolo.update(response.getProtocolo());
+        }
         listener.onUploadResult(response);
     }
 }

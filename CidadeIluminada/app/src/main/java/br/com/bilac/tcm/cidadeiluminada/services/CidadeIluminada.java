@@ -14,7 +14,7 @@ import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.CidadeIluminadaAdapter;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.CidadeIluminadaService;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.listeners.ProtocoloUploadListener;
-import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.tasks.SendFileTask;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.tasks.UploadProtocoloTask;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.callbacks.CidadeIluminadaProtocoloCallback;
 
 /**
@@ -33,7 +33,7 @@ public class CidadeIluminada {
         }
 
         boolean anonimo = preferences.getBoolean(Constants.ANONIMO_PREFERENCE_KEY, true);
-        new SendFileTask(uploadListenerActivity, uploadListenerActivity, anonimo).execute(protocolo);
+        new UploadProtocoloTask(uploadListenerActivity, uploadListenerActivity, anonimo).execute(protocolo);
     }
 
     public static void atualizarProtocolo(Protocolo protocolo, Context context) {
