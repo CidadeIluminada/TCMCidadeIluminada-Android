@@ -27,6 +27,7 @@ import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.models.CidadeIl
 public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploadListener{
 
     private Protocolo protocolo;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +88,7 @@ public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploa
         }
         item.setVisible(false);
         invalidateOptionsMenu();
-
+        this.menu = menu;
         return true;
     }
 
@@ -111,6 +112,7 @@ public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploa
     }
 
     private void enviarProtocolo(Protocolo protocolo) {
+        visibleMenuItem(R.id.action_detalhes_novo_protocolo, false);
         CidadeIluminada.enviarNovoProtocolo(protocolo, this);
     }
 
@@ -118,11 +120,21 @@ public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploa
         CidadeIluminada.atualizarProtocolo(protocolo, this);
     }
 
+    private void visibleMenuItem(int resId, boolean visible) {
+        if (menu == null) {
+            return;
+        }
+        MenuItem menuItem = menu.findItem(resId);
+        if (menuItem != null) {
+            menuItem.setVisible(visible);
+        }
+    }
+
     @Override
     public void onUploadResult(CidadeIluminadaApiResponse response) {
+        visibleMenuItem(R.id.action_detalhes_novo_protocolo, true);
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.protocoloProgressBar);
         progressBar.setVisibility(View.GONE);
-        Log.d("upload response", response.toString());
         if (response.isOk()) {
             protocolo.update(response.getProtocolo());
             preencherDadosProtocolo(protocolo);
