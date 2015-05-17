@@ -1,8 +1,6 @@
 package br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada;
 
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.models.CidadeIluminadaApiResponse;
-import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.models.CidadeIluminadaProtocoloApiResponse;
-import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Multipart;
 import retrofit.http.POST;
@@ -17,7 +15,7 @@ public interface CidadeIluminadaService {
 
     @Multipart
     @POST("/protocolos/novo/")
-    void novoProtocolo(@Part("cod_protocolo") String cod_protocolo,
+    CidadeIluminadaApiResponse novoProtocolo(@Part("cod_protocolo") String cod_protocolo,
                        @Part("cep") String cep,
                        @Part("logradouro") String logradouro,
                        @Part("cidade") String cidade,
@@ -25,11 +23,11 @@ public interface CidadeIluminadaService {
                        @Part("numero") String numero,
                        @Part("estado") String estado,
                        @Part("descricao") String descricao,
-                       @Part("arquivo_protocolo") TypedFile arquivo_protocolo,
-                       Callback<CidadeIluminadaApiResponse> callback);
+                       @Part("arquivo_protocolo") TypedFile arquivo_protocolo);
+
     @Multipart
     @POST("/protocolos/novo/")
-    void novoProtocoloIdentificado(@Part("cod_protocolo") String cod_protocolo,
+    CidadeIluminadaApiResponse novoProtocoloIdentificado(@Part("cod_protocolo") String cod_protocolo,
                                    @Part("cep") String cep,
                                    @Part("logradouro") String logradouro,
                                    @Part("cidade") String cidade,
@@ -39,10 +37,8 @@ public interface CidadeIluminadaService {
                                    @Part("descricao") String descricao,
                                    @Part("nome") String nome,
                                    @Part("email") String email,
-                                   @Part("arquivo_protocolo") TypedFile arquivo_protocolo,
-                                   Callback<CidadeIluminadaApiResponse> callback);
+                                   @Part("arquivo_protocolo") TypedFile arquivo_protocolo);
 
     @GET("/protocolos/protocolo.json")
-    void atualizarProtocolo(@Query("cod_protocolo") String codProtocolo,
-                            Callback<CidadeIluminadaProtocoloApiResponse> callback);
+    CidadeIluminadaApiResponse atualizarProtocolo(@Query("cod_protocolo") String codProtocolo);
 }

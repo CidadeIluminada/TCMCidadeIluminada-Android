@@ -108,7 +108,7 @@ public class ProtocoloActivity extends Activity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putParcelable(Constants.KEY_FILE_URI, fileUri);
         super.onSaveInstanceState(outState);
     }
@@ -157,8 +157,6 @@ public class ProtocoloActivity extends Activity {
             }
 
             protocolo.save();
-
-            CidadeIluminada.enviarNovoProtocolo(protocolo, getApplicationContext());
 
             Intent intent = new Intent();
             intent.putExtra(Constants.PROTOCOLO_ID_KEY, protocolo.getId());

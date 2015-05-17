@@ -2,16 +2,14 @@ package br.com.bilac.tcm.cidadeiluminada.protocolos.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.emil.android.util.Connectivity;
 
 import br.com.bilac.tcm.cidadeiluminada.CameraUtils;
 import br.com.bilac.tcm.cidadeiluminada.Constants;
@@ -19,13 +17,18 @@ import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.activities.SettingsActivity;
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
 import br.com.bilac.tcm.cidadeiluminada.services.CidadeIluminada;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.listeners.ProtocoloUpdateListener;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.listeners.ProtocoloUploadListener;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.models.CidadeIluminadaApiResponse;
 
 /**
  * Created by Work on 04/05/2015.
  */
-public class ProtocoloDetalheActivity extends Activity{
+public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploadListener,
+        ProtocoloUpdateListener{
 
     private Protocolo protocolo;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,17 +76,13 @@ public class ProtocoloDetalheActivity extends Activity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_protocolos_detalhes, menu);
-
+        this.menu = menu;
         String protocoloStatus = protocolo.getStatus();
-        MenuItem item;
         if (protocoloStatus.equals(Protocolo.NAO_ENVIADO)) {
-            item = menu.findItem(R.id.action_atualizar_protocolo);
-        } else {
-            item = menu.findItem(R.id.action_novo_protocolo);
+            enviarProtocolo(protocolo);
+        } else if (protocoloStatus.equals(Protocolo.NOVO)) {
+            atualizarProtocolo(protocolo);
         }
-        item.setVisible(false);
-        this.invalidateOptionsMenu();
-
         return true;
     }
 
@@ -102,11 +101,60 @@ public class ProtocoloDetalheActivity extends Activity{
         startActivity(new Intent(this, SettingsActivity.class));
     }
 
-    public void enviarProtocolo(MenuItem item) {
-        CidadeIluminada.enviarNovoProtocolo(protocolo, getApplicationContext());
+    public void enviarProtocoloMenu(MenuItem item) {
+        enviarProtocolo(protocolo);
     }
 
-    public void atualizarProtocolo(MenuItem item) {
+    private void enviarProtocolo(Protocolo protocolo) {
+        visibleMenuItem(R.id.action_detalhes_novo_protocolo, false);
+        CidadeIluminada.enviarNovoProtocolo(protocolo, this);
+    }
+
+    public void atualizarProtocoloMenu(MenuItem item) {
+        atualizarProtocolo(protocolo);
+    }
+
+    private void atualizarProtocolo(Protocolo protocolo) {
+        visibleMenuItem(R.id.action_atualizar_protocolo, false);
         CidadeIluminada.atualizarProtocolo(protocolo, this);
+    }
+
+    private void visibleMenuItem(int resId, boolean visible) {
+        if (menu == null) {
+            return;
+        }
+        MenuItem menuItem = menu.findItem(resId);
+        if (menuItem != null) {
+            menuItem.setVisible(visible);
+        }
+    }
+
+    @Override
+    public void onUploadResult(CidadeIluminadaApiResponse response) {
+        if (response.isOk()) {
+            preencherDadosProtocolo(protocolo);
+            visibleMenuItem(R.id.action_atualizar_protocolo, true);
+            Toast.makeText(this, R.string.protocolo_envio_sucesso, Toast.LENGTH_SHORT).show();
+        } else if (response.getStatus().equals(CidadeIluminadaApiResponse.STATUS_ERROR_MOBILE_NETWORK)) {
+            visibleMenuItem(R.id.action_detalhes_novo_protocolo, true);
+        } else {
+            visibleMenuItem(R.id.action_detalhes_novo_protocolo, true);
+            //TODO: Pegar o erro certinho
+            Toast.makeText(this, getText(R.string.protocolo_envio_erro), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onUpdateResult(CidadeIluminadaApiResponse response) {
+        if (response.isOk()) {
+            preencherDadosProtocolo(protocolo);
+            Toast.makeText(this, R.string.protocolo_atualiza_success, Toast.LENGTH_SHORT).show();
+        } else {
+            //TODO: Pegar o erro certinho
+            Toast.makeText(this, R.string.protocolo_atualiza_fail, Toast.LENGTH_LONG).show();
+        }
+        if (protocolo.getStatus().equals(Protocolo.NOVO)) {
+            visibleMenuItem(R.id.action_atualizar_protocolo, true);
+        }
     }
 }
