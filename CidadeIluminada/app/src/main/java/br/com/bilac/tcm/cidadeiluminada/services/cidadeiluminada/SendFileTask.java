@@ -78,6 +78,10 @@ public class SendFileTask extends AsyncTask<Protocolo, Integer, CidadeIluminadaA
             }
             return response;
         } catch (RetrofitError retrofitError) {
+            Log.e("uploadError", retrofitError.toString());
+            if (retrofitError.getKind() != RetrofitError.Kind.HTTP) {
+                return new CidadeIluminadaApiResponse(CidadeIluminadaApiResponse.STATUS_ERROR);
+            }
             return (CidadeIluminadaApiResponse) retrofitError.getBodyAs(CidadeIluminadaApiResponse.class);
         }
     }

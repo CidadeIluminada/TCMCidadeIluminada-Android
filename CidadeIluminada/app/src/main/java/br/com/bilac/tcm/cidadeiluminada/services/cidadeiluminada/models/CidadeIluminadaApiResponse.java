@@ -10,6 +10,13 @@ import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
 public class CidadeIluminadaApiResponse {
     private String status;
 
+    public CidadeIluminadaApiResponse() {
+    }
+
+    public CidadeIluminadaApiResponse(String status) {
+        this.status = status;
+    }
+
     public Protocolo getProtocolo() {
         return protocolo;
     }
@@ -50,9 +57,6 @@ public class CidadeIluminadaApiResponse {
     private Errors errors;
 
     private Protocolo protocolo;
-
-    public CidadeIluminadaApiResponse() {
-    }
 
     @Override
     public String toString() {
