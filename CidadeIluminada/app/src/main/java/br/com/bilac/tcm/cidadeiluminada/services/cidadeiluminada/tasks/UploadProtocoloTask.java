@@ -40,10 +40,8 @@ public class UploadProtocoloTask extends AsyncTask<Protocolo, Integer, CidadeIlu
 
     @Override
     protected void onPreExecute() {
-        if (progressBar != null) {
-            progressBar.setVisibility(View.VISIBLE);
-            progressBar.setIndeterminate(true);
-        }
+        progressBar.setIndeterminate(true);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -73,16 +71,14 @@ public class UploadProtocoloTask extends AsyncTask<Protocolo, Integer, CidadeIlu
         String email = protocolo.getEmail();
 
         CidadeIluminadaService service = CidadeIluminadaAdapter.getCidadeIluminadaService();
-        CidadeIluminadaApiResponse response;
         try {
             if (anonimo) {
-                response = service.novoProtocolo(codProtocolo, cep, logradouro, cidade, bairro, numero, estado,
+                return service.novoProtocolo(codProtocolo, cep, logradouro, cidade, bairro, numero, estado,
                         descricao, arquivoProtocolo);
             } else {
-                response = service.novoProtocoloIdentificado(codProtocolo, cep, logradouro, cidade, bairro,
+                return service.novoProtocoloIdentificado(codProtocolo, cep, logradouro, cidade, bairro,
                         numero, estado, descricao, nome, email, arquivoProtocolo);
             }
-            return response;
         } catch (RetrofitError retrofitError) {
             Log.e("uploadError", retrofitError.toString());
             if (retrofitError.getKind() != RetrofitError.Kind.HTTP) {
@@ -95,12 +91,10 @@ public class UploadProtocoloTask extends AsyncTask<Protocolo, Integer, CidadeIlu
     @Override
     protected void onProgressUpdate(Integer... values) {
         Log.d("progressUpdate", String.format("progress[%d]", values[0]));
-        if (progressBar != null) {
-            if (progressBar.isIndeterminate()) {
-                progressBar.setIndeterminate(false);
-            }
-            progressBar.setProgress(values[0]);
+        if (progressBar.isIndeterminate()) {
+            progressBar.setIndeterminate(false);
         }
+        progressBar.setProgress(values[0]);
     }
 
     @Override
@@ -109,6 +103,7 @@ public class UploadProtocoloTask extends AsyncTask<Protocolo, Integer, CidadeIlu
         if (response.isOk()) {
             protocolo.update(response.getProtocolo());
         }
+        progressBar.setVisibility(View.GONE);
         listener.onUploadResult(response);
     }
 }

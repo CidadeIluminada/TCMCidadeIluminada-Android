@@ -9,7 +9,6 @@ import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
  */
 public class CidadeIluminadaApiResponse {
     private String status;
-
     public CidadeIluminadaApiResponse() {
     }
 
@@ -21,7 +20,19 @@ public class CidadeIluminadaApiResponse {
         return protocolo;
     }
 
+    private Protocolo protocolo;
+    private Protocolo[] protocolos;
+
+    public Protocolo[] getProtocolos() {
+        return protocolos;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
     private static class Errors {
+
         private String cod_protocolo;
         private String[] cep;
         private String[] email;
@@ -55,9 +66,6 @@ public class CidadeIluminadaApiResponse {
     }
 
     private Errors errors;
-
-    private Protocolo protocolo;
-
     @Override
     public String toString() {
         return "CidadeIluminadaApiResponse{" +
@@ -73,4 +81,5 @@ public class CidadeIluminadaApiResponse {
 
     public static final String STATUS_OK = "OK";
     public static final String STATUS_ERROR = "ERROR";
+    public static final String STATUS_ERROR_MOBILE_NETWORK = "ERROR_MOBILE_NETWORK";
 }

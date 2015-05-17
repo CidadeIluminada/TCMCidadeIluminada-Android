@@ -17,13 +17,15 @@ import br.com.bilac.tcm.cidadeiluminada.R;
 import br.com.bilac.tcm.cidadeiluminada.activities.SettingsActivity;
 import br.com.bilac.tcm.cidadeiluminada.models.Protocolo;
 import br.com.bilac.tcm.cidadeiluminada.services.CidadeIluminada;
+import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.listeners.ProtocoloUpdateListener;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.listeners.ProtocoloUploadListener;
 import br.com.bilac.tcm.cidadeiluminada.services.cidadeiluminada.models.CidadeIluminadaApiResponse;
 
 /**
  * Created by Work on 04/05/2015.
  */
-public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploadListener{
+public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploadListener,
+        ProtocoloUpdateListener{
 
     private Protocolo protocolo;
     private Menu menu;
@@ -42,12 +44,6 @@ public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploa
 
         protocolo = Protocolo.findById(Protocolo.class, protocoloId);
         preencherDadosProtocolo(protocolo);
-        String protocoloStatus = protocolo.getStatus();
-        if (protocoloStatus.equals(Protocolo.NAO_ENVIADO)) {
-            enviarProtocolo(protocolo);
-        } else if (protocoloStatus.equals(Protocolo.NOVO)) {
-            atualizarProtocolo(protocolo);
-        }
     }
 
     public void preencherDadosProtocolo(Protocolo protocolo) {
@@ -81,6 +77,12 @@ public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploa
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_protocolos_detalhes, menu);
         this.menu = menu;
+        String protocoloStatus = protocolo.getStatus();
+        if (protocoloStatus.equals(Protocolo.NAO_ENVIADO)) {
+            enviarProtocolo(protocolo);
+        } else if (protocoloStatus.equals(Protocolo.NOVO)) {
+            atualizarProtocolo(protocolo);
+        }
         return true;
     }
 
@@ -115,7 +117,6 @@ public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploa
     private void atualizarProtocolo(Protocolo protocolo) {
         visibleMenuItem(R.id.action_atualizar_protocolo, false);
         CidadeIluminada.atualizarProtocolo(protocolo, this);
-        visibleMenuItem(R.id.action_atualizar_protocolo, true);
     }
 
     private void visibleMenuItem(int resId, boolean visible) {
@@ -130,15 +131,30 @@ public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploa
 
     @Override
     public void onUploadResult(CidadeIluminadaApiResponse response) {
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.protocoloProgressBar);
-        progressBar.setVisibility(View.GONE);
         if (response.isOk()) {
             preencherDadosProtocolo(protocolo);
             visibleMenuItem(R.id.action_atualizar_protocolo, true);
+            Toast.makeText(this, R.string.protocolo_envio_sucesso, Toast.LENGTH_SHORT).show();
+        } else if (response.getStatus().equals(CidadeIluminadaApiResponse.STATUS_ERROR_MOBILE_NETWORK)) {
+            visibleMenuItem(R.id.action_detalhes_novo_protocolo, true);
         } else {
             visibleMenuItem(R.id.action_detalhes_novo_protocolo, true);
             //TODO: Pegar o erro certinho
             Toast.makeText(this, getText(R.string.protocolo_envio_erro), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onUpdateResult(CidadeIluminadaApiResponse response) {
+        if (response.isOk()) {
+            preencherDadosProtocolo(protocolo);
+            Toast.makeText(this, R.string.protocolo_atualiza_success, Toast.LENGTH_SHORT).show();
+        } else {
+            //TODO: Pegar o erro certinho
+            Toast.makeText(this, R.string.protocolo_atualiza_fail, Toast.LENGTH_LONG).show();
+        }
+        if (protocolo.getStatus().equals(Protocolo.NOVO)) {
+            visibleMenuItem(R.id.action_atualizar_protocolo, true);
         }
     }
 }

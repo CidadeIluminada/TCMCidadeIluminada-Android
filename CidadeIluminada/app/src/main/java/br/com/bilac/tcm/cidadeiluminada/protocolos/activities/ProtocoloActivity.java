@@ -108,7 +108,7 @@ public class ProtocoloActivity extends Activity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putParcelable(Constants.KEY_FILE_URI, fileUri);
         super.onSaveInstanceState(outState);
     }
