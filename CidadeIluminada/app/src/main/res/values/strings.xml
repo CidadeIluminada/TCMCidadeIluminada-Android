@@ -50,4 +50,7 @@
     <string name="logo_cidade_iluminada_description">Logo Cidade Iluminada</string>
     <string name="label_cod_protocolo">Código:</string>
     <string name="label_action_atualizar_protocolo">Atualizar Protocolo</string>
+    <string name="enviar_fail_rede_celular">Não é possível enviar protocolo pela rede celular. Verifique as suas configurações</string>
+    <string name="protocolo_atualiza_fail">Erro ao atualizar o protocolo</string>
+    <string name="protocolo_atualiza_success">Protocolo atualizado com sucesso</string>
 </resources>
