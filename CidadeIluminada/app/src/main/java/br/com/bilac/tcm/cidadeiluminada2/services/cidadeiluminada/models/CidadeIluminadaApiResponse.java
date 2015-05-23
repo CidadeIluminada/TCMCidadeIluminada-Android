@@ -10,6 +10,7 @@ import br.com.bilac.tcm.cidadeiluminada2.models.Protocolo;
 public class CidadeIluminadaApiResponse {
     private String status;
     public CidadeIluminadaApiResponse() {
+        status = STATUS_UNKNOWN;
     }
 
     public CidadeIluminadaApiResponse(String status) {
@@ -82,4 +83,5 @@ public class CidadeIluminadaApiResponse {
     public static final String STATUS_OK = "OK";
     public static final String STATUS_ERROR = "ERROR";
     public static final String STATUS_ERROR_MOBILE_NETWORK = "ERROR_MOBILE_NETWORK";
+    public static final String STATUS_UNKNOWN = "UNKNOWN";
 }
