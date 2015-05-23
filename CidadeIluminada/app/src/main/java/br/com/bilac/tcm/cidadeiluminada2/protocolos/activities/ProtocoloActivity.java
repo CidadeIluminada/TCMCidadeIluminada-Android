@@ -33,6 +33,7 @@ import br.com.bilac.tcm.cidadeiluminada2.Constants;
 import br.com.bilac.tcm.cidadeiluminada2.R;
 import br.com.bilac.tcm.cidadeiluminada2.activities.SettingsActivity;
 import br.com.bilac.tcm.cidadeiluminada2.models.Protocolo;
+import br.com.bilac.tcm.cidadeiluminada2.protocolos.validators.CEPValidator;
 import br.com.bilac.tcm.cidadeiluminada2.protocolos.validators.EmptyValidator;
 import br.com.bilac.tcm.cidadeiluminada2.protocolos.validators.ValidationState;
 
@@ -48,6 +49,9 @@ public class ProtocoloActivity extends Activity {
     private EditText bairroEditText;
     private EditText ruaEditText;
     private EditText numeroEditText;
+    private EmptyValidator descricaoValidator;
+    private CEPValidator cepValidator;
+    private EmptyValidator numeroValidator;
 
     public void openPlacePicker(View view) {
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
@@ -93,11 +97,13 @@ public class ProtocoloActivity extends Activity {
         ruaEditText = (EditText) findViewById(R.id.ruaEditText);
         numeroEditText = (EditText) findViewById(R.id.numeroEditText);
 
-        descricaoEditText.addTextChangedListener(new EmptyValidator(descricaoEditText,
-                descricaoValidationState));
-        cepEditText.addTextChangedListener(new EmptyValidator(cepEditText, cepValidationState));
-        numeroEditText.addTextChangedListener(new EmptyValidator(numeroEditText,
-                numeroValidationState));
+        descricaoValidator = new EmptyValidator(descricaoEditText, descricaoValidationState);
+        cepValidator = new CEPValidator(cepEditText, cepValidationState);
+        numeroValidator = new EmptyValidator(numeroEditText, numeroValidationState);
+
+        descricaoEditText.addTextChangedListener(descricaoValidator);
+        cepEditText.addTextChangedListener(cepValidator);
+        numeroEditText.addTextChangedListener(numeroValidator);
 
         String preference_cep = getSharedPreferences().getString(Constants.CEP_PREFERENCE_KEY, "");
 
@@ -162,6 +168,9 @@ public class ProtocoloActivity extends Activity {
             setResult(RESULT_OK, intent);
             finish();
         } else {
+            numeroValidator.check();
+            cepValidator.check();
+            descricaoValidator.check();
             Toast.makeText(this, R.string.erro_formulario_protocolo, Toast.LENGTH_SHORT).show();
         }
     }

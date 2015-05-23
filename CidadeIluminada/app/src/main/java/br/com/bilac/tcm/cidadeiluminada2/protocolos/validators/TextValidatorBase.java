@@ -30,6 +30,10 @@ public abstract class TextValidatorBase implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable s) {
+        check();
+    }
+
+    public void check() {
         boolean result = validate(textView.getText().toString());
         if (!result) {
             textView.setError(errorMessage);
