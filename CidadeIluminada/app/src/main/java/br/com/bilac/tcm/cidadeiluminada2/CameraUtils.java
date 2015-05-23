@@ -33,8 +33,19 @@ public class CameraUtils {
                 return null;
             }
         }
+
+        String filename = getFilename();
+        String path = getPath(mediaStorageDir);
+        return Uri.fromFile(new File(path + filename));
+    }
+
+    private static String getPath(File mediaStorageDir) {
+        return mediaStorageDir.getPath() + File.separator;
+    }
+
+    private static String getFilename() {
         DateTime date = new DateTime(DateTimeZone.UTC);
-        return Uri.fromFile(new File(mediaStorageDir.getPath() + File.separator + "IMG_" +
-                date.toString() + Constants.PHOTO_EXTENSION));
+        String dateString = date.toString();
+        return "IMG_" + dateString.replace(":", "") + Constants.PHOTO_EXTENSION;
     }
 }
