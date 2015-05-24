@@ -9,6 +9,10 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by arthur on 04/04/15.
@@ -33,8 +37,25 @@ public class CameraUtils {
                 return null;
             }
         }
-        DateTime date = new DateTime(DateTimeZone.UTC);
-        return Uri.fromFile(new File(mediaStorageDir.getPath() + File.separator + "IMG_" +
-                date.toString() + Constants.PHOTO_EXTENSION));
+        String filename = getFileName();
+        return Uri.fromFile(new File(mediaStorageDir.getPath() + File.separator + filename));
+    }
+
+
+    private static String getFileName(){
+        String prefix = "IMG_";
+        String extension = Constants.PHOTO_EXTENSION;
+
+        Date today = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTime();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-hh.mm.ss");
+
+        String trunk = formatter.format(today);
+
+
+
+        return prefix + trunk + extension;
     }
 }
+
+

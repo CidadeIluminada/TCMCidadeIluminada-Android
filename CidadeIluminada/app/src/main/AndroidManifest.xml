@@ -62,7 +62,7 @@
             android:label="@string/title_activity_protocolo"
             android:parentActivityName="br.com.bilac.tcm.cidadeiluminada2.activities.MainActivity"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateUnchanged">
+            android:windowSoftInputMode="adjustPan">
 
 
             <meta-data

@@ -1,16 +1,21 @@
 package br.com.bilac.tcm.cidadeiluminada2.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 
 import br.com.bilac.tcm.cidadeiluminada2.Constants;
 import br.com.bilac.tcm.cidadeiluminada2.R;
 import br.com.bilac.tcm.cidadeiluminada2.protocolos.activities.ProtocoloActivity;
 import br.com.bilac.tcm.cidadeiluminada2.protocolos.activities.ProtocolosListaActivity;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class MainActivity extends Activity {
@@ -18,6 +23,13 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                        .setDefaultFontPath("Roboto/RobotoCondensed-Light.ttf")
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()
+        );
+
         getActionBar().hide();
         setContentView(R.layout.activity_main);
     }
@@ -25,10 +37,17 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

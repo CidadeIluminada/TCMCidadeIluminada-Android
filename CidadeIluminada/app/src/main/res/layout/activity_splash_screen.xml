@@ -44,6 +44,14 @@
         android:text="@string/site"
         android:id="@+id/textView" />
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="1dp">
+
 
     <ImageView
         android:id="@+id/imgBilac"
@@ -51,9 +59,10 @@
         android:layout_height="90dip"
         android:src="@drawable/bilac9"
         android:layout_marginRight="10dp"
-
+        android:layout_centerInParent="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginTop="8dp"
+      />
 
 
     <ImageView
@@ -62,8 +71,11 @@
         android:layout_height="110dip"
         android:src="@drawable/logopmsjc9"
         android:layout_marginRight="20dp"
+        android:layout_centerInParent="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+       />
+
+    </LinearLayout>
 
 
 

@@ -1,9 +1,11 @@
 package br.com.bilac.tcm.cidadeiluminada2.protocolos.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
@@ -17,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -35,6 +38,8 @@ import br.com.bilac.tcm.cidadeiluminada2.activities.SettingsActivity;
 import br.com.bilac.tcm.cidadeiluminada2.models.Protocolo;
 import br.com.bilac.tcm.cidadeiluminada2.protocolos.validators.EmptyValidator;
 import br.com.bilac.tcm.cidadeiluminada2.protocolos.validators.ValidationState;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class ProtocoloActivity extends Activity {
 
@@ -115,9 +120,22 @@ public class ProtocoloActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                        .setDefaultFontPath("Roboto/RobotoCondensed-Light.ttf")
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()
+        );
+
         getMenuInflater().inflate(R.menu.menu_protocolo, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -185,7 +203,7 @@ public class ProtocoloActivity extends Activity {
                 setCameraButtonImage();
             } else if (resultCode == RESULT_CANCELED) {
                 ImageButton img = (ImageButton) findViewById(R.id.openCameraButton);
-                img.setImageDrawable(getResources().getDrawable(R.drawable.camera_botao));
+                img.setImageDrawable(getResources().getDrawable(R.drawable.camaera_03));
             }
         } else if (requestCode == Constants.PLACE_PICKER_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {

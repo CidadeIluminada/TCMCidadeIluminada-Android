@@ -19,6 +19,7 @@
     <!-- ActionBar title text -->
     <style name="MyActionBarTitleText"
         parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="fontPath">Roboto/RobotoCondensed-Light.ttf</item>
         <item name="android:textColor">@color/branca</item>
     </style>
 
