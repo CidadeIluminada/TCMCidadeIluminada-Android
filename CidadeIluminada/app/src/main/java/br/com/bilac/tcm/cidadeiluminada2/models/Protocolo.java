@@ -6,6 +6,9 @@ import com.orm.SugarRecord;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -146,5 +149,11 @@ public class Protocolo extends SugarRecord {
         setStatus(protocolo.getStatus());
         // Atualizar o resto
         save();
+    }
+
+    public String getFormattedTimestamp() {
+        DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
+        DateTime dateTime = fmt.withZone(DateTimeZone.forOffsetHours(-3)).parseDateTime(getTimestamp());
+        return dateTime.toString("dd/MM/YYYY HH:mm");
     }
 }

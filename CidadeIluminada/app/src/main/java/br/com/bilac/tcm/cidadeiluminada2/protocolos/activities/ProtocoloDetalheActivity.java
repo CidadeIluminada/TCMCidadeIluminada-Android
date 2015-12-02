@@ -63,7 +63,7 @@ public class ProtocoloDetalheActivity extends Activity implements ProtocoloUploa
 
         codigo.setText(protocolo.getCodProtocolo());
         situacao.setText(protocolo.getStatus(true));
-        criado.setText(protocolo.getTimestamp());
+        criado.setText(protocolo.getFormattedTimestamp());
         descricao.setText(protocolo.getDescricao());
         cep.setText(protocolo.getCep());
         bairro.setText(protocolo.getBairro());

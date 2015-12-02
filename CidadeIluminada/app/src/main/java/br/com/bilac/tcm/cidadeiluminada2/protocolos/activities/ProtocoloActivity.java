@@ -214,6 +214,8 @@ public class ProtocoloActivity extends Activity {
     private void setCameraButtonImage() {
         ImageButton img = (ImageButton) findViewById(R.id.openCameraButton);
         Bitmap bmp = CameraUtils.decodeSampledBitmapFromFile(fileUri.getPath(), 128, 128);
-        img.setImageBitmap(bmp);
+        if (bmp != null) {
+            img.setImageBitmap(bmp);
+        }
     }
 }

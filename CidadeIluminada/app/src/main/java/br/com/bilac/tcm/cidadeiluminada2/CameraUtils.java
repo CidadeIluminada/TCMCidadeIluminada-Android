@@ -16,7 +16,9 @@ import java.io.File;
 public class CameraUtils {
     public static Bitmap decodeSampledBitmapFromFile(String path, int requiredWidth,
                                                       int requiredHeight) {
-
+        if (path == null) {
+            return null;
+        }
         Bitmap bmp = BitmapFactory.decodeFile(path, null);
         return Bitmap.createScaledBitmap(bmp, requiredWidth, requiredHeight, true);
     }

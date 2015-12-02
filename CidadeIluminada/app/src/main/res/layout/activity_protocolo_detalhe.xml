@@ -19,6 +19,8 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
             android:visibility="gone" />
 
         <ImageView
@@ -41,6 +43,7 @@
             android:layout_below="@+id/fotoProtocoloView"
             android:layout_marginTop="@dimen/protocoloMainItemsMargin"
             android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:labelFor="@+id/codProtocoloText"
             />
 
@@ -51,10 +54,14 @@
             android:text=""
             android:id="@+id/codProtocoloText"
             android:layout_toEndOf="@+id/codProtocoloLabel"
+            android:layout_toRightOf="@+id/codProtocoloLabel"
             android:singleLine="true"
             android:layout_alignBaseline="@+id/codProtocoloLabel"
             android:layout_alignParentEnd="true"
-            android:layout_alignStart="@+id/dataProtocoloText" />
+            android:layout_alignParentRight="true"
+            android:layout_alignStart="@+id/dataProtocoloText"
+            android:layout_alignLeft="@+id/dataProtocoloText"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -65,7 +72,9 @@
             android:layout_below="@+id/codProtocoloLabel"
             android:layout_marginTop="@dimen/protocoloMainItemsMargin"
             android:layout_alignParentStart="true"
-            android:labelFor="@+id/statusProtocoloText"/>
+            android:layout_alignParentLeft="true"
+            android:labelFor="@+id/statusProtocoloText"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -74,10 +83,14 @@
             android:text=""
             android:id="@+id/statusProtocoloText"
             android:layout_toEndOf="@+id/statusProtocoloLabel"
+            android:layout_toRightOf="@+id/statusProtocoloLabel"
             android:singleLine="true"
             android:layout_alignBaseline="@+id/statusProtocoloLabel"
             android:layout_alignParentEnd="true"
-            android:layout_alignStart="@+id/dataProtocoloText" />
+            android:layout_alignParentRight="true"
+            android:layout_alignStart="@+id/dataProtocoloText"
+            android:layout_alignLeft="@+id/dataProtocoloText"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -87,7 +100,9 @@
             android:id="@+id/dataProtocoloLabel"
             android:layout_below="@+id/statusProtocoloLabel"
             android:layout_marginTop="@dimen/protocoloMainItemsMargin"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -96,10 +111,13 @@
             android:text=""
             android:id="@+id/dataProtocoloText"
             android:layout_toEndOf="@+id/dataProtocoloLabel"
+            android:layout_toRightOf="@+id/dataProtocoloLabel"
             android:singleLine="true"
             android:layout_alignBaseline="@+id/dataProtocoloLabel"
             android:layout_marginLeft="10dp"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            />
 
         <TextView
             android:id="@+id/descricaoProtocoloLabel"
@@ -110,17 +128,21 @@
             android:layout_marginTop="@dimen/protocoloMainItemsMargin"
             android:layout_below="@+id/dataProtocoloLabel"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="5dp" />
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="5dp"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-
+            android:layout_marginLeft="10dp"
             android:id="@+id/descricaoProtocoloText"
             android:layout_below="@+id/descricaoProtocoloLabel"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
             android:layout_marginBottom="15dp" />
 
         <TextView
@@ -130,11 +152,14 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/label_protocolo_secao_endereco"
             android:drawableStart="@drawable/ic_map_marker_radius_black_24dp"
+            android:drawableLeft="@drawable/ic_map_marker_radius_black_24dp"
             android:textSize="20sp"
             android:textAlignment="center"
             android:layout_below="@+id/descricaoProtocoloText"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="@dimen/protocoloMainItemsMargin" />
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/protocoloMainItemsMargin"
+            />
 
         <TextView
             android:id="@+id/cepProtocoloLabel"
@@ -145,7 +170,10 @@
             android:layout_marginTop="25dp"
             android:layout_below="@+id/enderecoProtocoloLabel"
             android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="false" />
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="false"
+            />
 
         <TextView
             android:layout_width="100dp"
@@ -155,8 +183,11 @@
             android:layout_alignTop="@+id/cepProtocoloLabel"
             android:layout_alignBaseline="@+id/cepProtocoloLabel"
             android:layout_alignStart="@+id/numeroText"
+            android:layout_alignLeft="@+id/numeroText"
             android:layout_marginBottom="@dimen/protocoloEnderecoFieldsMargin"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -166,6 +197,7 @@
             android:id="@+id/bairroProtocoloLabel"
             android:layout_below="@+id/cepText"
             android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             />
 
         <TextView
@@ -175,7 +207,9 @@
             android:layout_alignTop="@+id/bairroProtocoloLabel"
             android:layout_alignBaseline="@+id/bairroProtocoloLabel"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_alignStart="@+id/numeroText"
+            android:layout_alignLeft="@+id/numeroText"
             android:layout_marginBottom="@dimen/protocoloEnderecoFieldsMargin" />
 
 
@@ -188,6 +222,7 @@
             android:labelFor="@+id/ruaText"
             android:layout_below="@+id/bairroText"
             android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             />
 
         <TextView
@@ -197,8 +232,11 @@
             android:layout_alignTop="@+id/ruaProtocoloLabel"
             android:layout_alignBaseline="@id/ruaProtocoloLabel"
             android:layout_alignStart="@+id/numeroText"
+            android:layout_alignLeft="@+id/numeroText"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="@dimen/protocoloEnderecoFieldsMargin" />
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/protocoloEnderecoFieldsMargin"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -208,6 +246,7 @@
             android:id="@+id/numeroProtocoloLabel"
             android:layout_below="@+id/ruaText"
             android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             />
 
         <TextView
@@ -216,9 +255,12 @@
             android:id="@+id/numeroText"
             android:layout_alignTop="@+id/numeroProtocoloLabel"
             android:layout_toEndOf="@id/numeroProtocoloLabel"
+            android:layout_toRightOf="@id/numeroProtocoloLabel"
             android:layout_alignBaseline="@+id/numeroProtocoloLabel"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_marginStart="@dimen/protocoloEnderecoFieldsMargin"
+            android:layout_marginLeft="@dimen/protocoloEnderecoFieldsMargin"
             android:layout_marginBottom="@dimen/protocoloEnderecoFieldsMargin" />
 
     </RelativeLayout>
